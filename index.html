@@ -285,7 +285,7 @@ blockquote cite { display: block; margin-top: var(--sc-3); font-family: var(--sc
   </section>
 
   <!-- II · Le geste : le miroir embué. Le pic, la plus grande travée. -->
-  <section class="peak" id="geste" data-sc-act="pin" data-sc-span="3" data-chapter="II" data-chapter-title="Le geste" aria-label="Le geste">
+  <section class="peak" id="geste" data-sc-act="pin" data-sc-span="2.6" data-chapter="II" data-chapter-title="Le geste" aria-label="Le geste">
     <div data-sc-stage class="sc-stage mirror" id="mirror">
       <img class="mirror__layer mirror__towel" src="assets/serviette.webp" srcset="assets/serviette-m.webp 800w, assets/serviette.webp 1600w" sizes="100vw" width="1600" height="900" alt="Une serviette chaude brodée Sainte-Anne Barber posée sur le visage d'un client.">
       <img class="mirror__layer mirror__towel-blur" id="towelBlur" src="assets/serviette-blur.webp" srcset="assets/serviette-blur-m.webp 800w, assets/serviette-blur.webp 1600w" sizes="100vw" width="1600" height="900" alt="" aria-hidden="true">
@@ -416,25 +416,25 @@ ScrollCraft.mount(document.body);
   function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
   var last = -1;
   function render(p) {
-    var fogIn = easeOut(clamp(p / 0.18));
-    var wipe = easeOut(clamp((p - 0.50) / 0.25));
-    var write = easeOut(clamp((p - 0.18) / 0.32));
-    var settle = easeOut(clamp((p - 0.75) / 0.15));
+    var fogIn = easeOut(clamp(p / 0.15));
+    var wipe = easeOut(clamp((p - 0.45) / 0.23));
+    var write = easeOut(clamp((p - 0.15) / 0.30));
+    var settle = easeOut(clamp((p - 0.68) / 0.14));
 
     blur.style.opacity = fogIn.toFixed(3);
     if (!reduced) {
       blur.style.transform = 'scale(' + (1 + 0.06 * clamp(p / 0.5)).toFixed(4) + ')';
-      fog.style.setProperty('--drift', (p * 100).toFixed(1) + 'px');
+      fog.style.setProperty('--drift', (p * 220).toFixed(1) + 'px');
     }
     fog.style.opacity = (0.94 * fogIn * (1 - wipe)).toFixed(3);
     fog.style.clipPath = wipe > 0
       ? 'polygon(0 0,' + (100 - wipe * 135) + '% 0,' + (100 - wipe * 135 - 28) + '% 100%,0 100%)'
       : 'none';
     /* the blade photo is already under the fog when the towel wipes it away */
-    blade.style.opacity = clamp((p - 0.36) / 0.14).toFixed(3);
+    blade.style.opacity = clamp((p - 0.32) / 0.12).toFixed(3);
     if (!reduced) {
-      var kb = 1.10 - 0.10 * clamp((p - 0.5) / 0.5);
-      blade.style.transform = 'scale(' + kb.toFixed(4) + ')';
+      var kt = clamp((p - 0.45) / 0.55), kb = 1.16 - 0.16 * kt;
+      blade.style.transform = 'translate(' + (-2.5 * (1 - kt)).toFixed(3) + '%, ' + (1.5 * (1 - kt)).toFixed(3) + '%) scale(' + kb.toFixed(4) + ')';
     }
     var n = spans.length;
     for (var i = 0; i < n; i++) {
@@ -449,6 +449,10 @@ ScrollCraft.mount(document.body);
     after.style.opacity = settle.toFixed(3);
     if (!reduced) after.style.transform = 'translateY(' + ((1 - settle) * 10).toFixed(1) + 'px)';
     cap.style.opacity = (wipe * 0.9).toFixed(3);
+    /* publish the bespoke state so the verification harness can see it move */
+    var stage = document.getElementById('mirror');
+    stage.setAttribute('data-sc-verify-state', 'fog:' + fogIn.toFixed(2) + ' write:' + write.toFixed(2) + ' wipe:' + wipe.toFixed(2) + ' settle:' + settle.toFixed(2));
+    stage.setAttribute('data-sc-verify-hold', p >= 0.84 ? 'true' : 'false');
   }
   function tick() {
     var p = parseFloat(getComputedStyle(act).getPropertyValue('--sc-p')) || 0;
