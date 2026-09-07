@@ -314,6 +314,78 @@ figcaption span:last-child { color: rgba(244,241,232,.7); }
 .foot__in a { text-decoration: none; }
 .foot__in a:hover { color: var(--creme); }
 .foot__links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+
+/* ---------- galerie 3D : un couloir de photos, on avance en scrollant ---------- */
+.g3d { position: relative; height: 380vh; }
+.g3d__stage { position: sticky; top: 0; height: 100svh; height: 100dvh; overflow: clip; perspective: 1100px; perspective-origin: 50% 50%; isolation: isolate; }
+.g3d__head { position: absolute; left: var(--gutter); top: 6rem; z-index: 5; max-width: 30rem; }
+.g3d__world { position: absolute; inset: 0; transform-style: preserve-3d; }
+.g3d__world figure { position: absolute; left: 50%; top: 50%; width: clamp(15rem, 26vw, 25rem); margin: 0; transform-style: preserve-3d; will-change: transform, opacity; }
+.g3d__world figure .ph { box-shadow: 0 40px 90px -30px rgba(0,0,0,.8); }
+.g3d__world figure.tall img { aspect-ratio: 4 / 5; }
+.g3d__world figure.wide { width: clamp(20rem, 36vw, 36rem); }
+.g3d__world figure.wide img { aspect-ratio: 3 / 2; }
+.g3d__world figure.sq img { aspect-ratio: 1; }
+.g3d__vig { position: absolute; inset: 0; z-index: 4; pointer-events: none; background: radial-gradient(120% 90% at 50% 50%, transparent 45%, rgba(14,14,14,.85) 100%); }
+.g3d__bar { position: absolute; left: var(--gutter); right: var(--gutter); bottom: 2rem; z-index: 5; display: flex; justify-content: space-between; align-items: end; gap: 2rem; }
+.g3d__cap { font-size: .9rem; color: var(--ink-soft); }
+.g3d__cap b { display: block; font-stretch: 68%; font-weight: 700; font-size: 1.5rem; color: var(--creme); line-height: 1; margin-bottom: .3rem; }
+.g3d__prog { width: 9rem; height: 2px; background: rgba(244,241,232,.18); border-radius: 2px; overflow: hidden; }
+.g3d__prog i { display: block; height: 100%; width: 100%; background: var(--creme); transform-origin: left; transform: scaleX(0); }
+@media (max-width: 899px) {
+  .g3d { height: 320vh; }
+  .g3d__world figure { width: 60vw; }
+  .g3d__world figure.wide { width: 74vw; }
+  .g3d__head { top: 5.5rem; max-width: 20rem; }
+  .g3d__bar { bottom: 5.5rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .g3d { height: auto; }
+  .g3d__stage { position: relative; height: auto; perspective: none; overflow: visible; padding: var(--section) 0; }
+  .g3d__head { position: relative; top: 0; margin-bottom: 2rem; }
+  .g3d__world { position: relative; inset: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); gap: 1rem; padding-inline: var(--gutter); }
+  .g3d__world figure { position: static; width: auto !important; transform: none !important; opacity: 1 !important; }
+  .g3d__vig, .g3d__bar { display: none; }
+}
+
+/* ---------- état en direct ---------- */
+.live { display: inline-flex; align-items: center; gap: .5rem; font-size: .85rem; color: var(--ink-soft); white-space: nowrap; }
+.live::before { content: ""; width: .5rem; height: .5rem; border-radius: 50%; background: #6FBF8A; box-shadow: 0 0 0 0 rgba(111,191,138,.5); animation: pulse 2.4s ease-out infinite; }
+.live.is-closed::before { background: #B4574B; animation: none; box-shadow: none; }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(111,191,138,.5); } 70% { box-shadow: 0 0 0 .55rem rgba(111,191,138,0); } 100% { box-shadow: 0 0 0 0 rgba(111,191,138,0); } }
+.hdr .live { display: none; margin-right: .5rem; }
+@media (min-width: 1200px) { .hdr .live { display: inline-flex; } }
+
+/* ---------- barre mobile ---------- */
+.bar { position: fixed; left: .75rem; right: .75rem; bottom: max(.75rem, env(safe-area-inset-bottom)); z-index: 85; display: flex; align-items: center; justify-content: space-between; gap: .75rem; padding: .5rem .5rem .5rem 1.1rem; border-radius: var(--r-pill); background: rgba(20,20,20,.78); border: 1px solid rgba(244,241,232,.14); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); color: var(--creme); transform: translateY(140%); transition: transform .7s var(--ease); }
+.bar.on { transform: none; }
+.bar .btn { min-height: 2.7rem; }
+.bar__tel { width: 2.7rem; height: 2.7rem; border-radius: 50%; border: 1px solid rgba(244,241,232,.2); display: grid; place-items: center; color: var(--creme); }
+.bar__tel svg { width: 1rem; height: 1rem; }
+.bar__r { display: flex; align-items: center; gap: .5rem; }
+@media (min-width: 900px) { .bar { display: none; } }
+
+/* ---------- curseur ---------- */
+.cur { position: fixed; left: 0; top: 0; z-index: 200; opacity: 0; width: 10px; height: 10px; border-radius: 50%; background: var(--creme); mix-blend-mode: difference; pointer-events: none; transform: translate(-50%, -50%); transition: width .35s var(--ease), height .35s var(--ease), opacity .3s; display: none; }
+.cur span { position: absolute; inset: 0; display: grid; place-items: center; font-size: .72rem; font-weight: 600; letter-spacing: .04em; color: var(--noir); opacity: 0; transition: opacity .25s; }
+.cur.is-voir { width: 72px; height: 72px; mix-blend-mode: normal; }
+.cur.is-voir span { opacity: 1; }
+.cur.is-link { width: 28px; height: 28px; }
+@media (hover: hover) and (pointer: fine) { .cur { display: block; } }
+
+/* ---------- entrées de section pilotées au scroll ---------- */
+[data-grow] .ph { transform: scale(calc(0.9 + 0.1 * var(--p, 1))); border-radius: calc(var(--r-img) + 18px * (1 - var(--p, 1))); transition: none; will-change: transform; }
+@media (prefers-reduced-motion: reduce) { [data-grow] .ph { transform: none; border-radius: var(--r-img); } }
+
+/* ---------- offrir ---------- */
+.gift { display: grid; gap: 1rem; grid-template-columns: 1fr; align-items: center; padding: clamp(1.5rem, 3vw, 2.5rem); border-radius: var(--r-img); border: 1px solid var(--line); margin-top: clamp(2rem, 4vw, 3rem); }
+@media (min-width: 760px) { .gift { grid-template-columns: 1fr auto; gap: 2rem; } }
+.gift b { display: block; font-stretch: 68%; font-weight: 700; font-size: 1.8rem; line-height: 1; margin-bottom: .5rem; }
+.gift p { margin: 0; color: var(--ink-soft); max-width: 44ch; }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
 </style>
 </head>
 <body class="locked">
@@ -330,10 +402,12 @@ figcaption span:last-child { color: rgba(244,241,232,.7); }
       <a href="#salon">Le salon</a>
       <a href="#equipe">L'équipe</a>
       <a href="#carte">La carte</a>
+      <a href="#galerie">En salon</a>
       <a href="#avis">Avis</a>
       <a href="#venir">Contact</a>
     </nav>
     <div class="hdr__right">
+      <span class="live" data-live></span>
       <a class="ig" href="https://www.instagram.com/sainte_anne_barber/" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
       <a class="btn btn--solid btn--plain" href="https://www.planity.com/sainte-anne-barber-34000-montpellier" rel="noopener">Réserver</a>
     </div>
@@ -359,6 +433,7 @@ figcaption span:last-child { color: rgba(244,241,232,.7); }
           <div class="glass">
             <b>5,0 <span class="star" aria-hidden="true">★</span></b>
             <p>Plus de 50 avis Google. Un moment pour soi, rue Ranchin, dans l'Écusson.</p>
+            <span class="live" data-live style="margin-top:.4rem"></span>
           </div>
           <div class="badge" aria-hidden="true"><svg viewBox="0 0 100 100"><defs><path id="circ" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0"/></defs><text><textPath href="#circ">Montpellier · Écusson · Rue Ranchin · </textPath></text></svg></div>
         </div>
@@ -394,7 +469,7 @@ figcaption span:last-child { color: rgba(244,241,232,.7); }
             <div><b>2</b><span>Barbiers</span></div>
           </div>
         </div>
-        <figure class="rv clipw r45"><div class="ph clip"><img src="assets/salon.webp" srcset="assets/salon-m.webp 800w, assets/salon.webp 1600w" sizes="(min-width: 900px) 45vw, 100vw" width="1600" height="900" alt="L'intérieur du salon : miroirs, brique, fauteuils noirs, lumière chaude." loading="lazy" style="object-position: 60% 50%"></div>
+        <figure data-cursor="voir" class="rv clipw r45" data-grow><div class="ph clip"><img src="assets/salon.webp" srcset="assets/salon-m.webp 800w, assets/salon.webp 1600w" sizes="(min-width: 900px) 45vw, 100vw" width="1600" height="900" alt="L'intérieur du salon : miroirs, brique, fauteuils noirs, lumière chaude." loading="lazy" style="object-position: 60% 50%"></div>
           <figcaption><span><b>Le salon</b>Rue Ranchin</span></figcaption>
         </figure>
       </div>
@@ -412,8 +487,8 @@ figcaption span:last-child { color: rgba(244,241,232,.7); }
         <p class="body rv f" style="max-width:38ch">Deux barbiers, une façon de travailler : on regarde d'abord, on écoute ensuite, et on prend le temps de finir. Dégradés, coupes aux ciseaux, tailles de barbe au rasoir, soins du visage.</p>
       </div>
       <div class="team">
-        <figure class="rv clipw r45"><div class="ph clip"><img src="assets/barbier.webp" srcset="assets/barbier-m.webp 800w, assets/barbier.webp 1600w" sizes="(min-width: 640px) 50vw, 100vw" width="1600" height="900" alt="Un barbier concentré sur sa coupe, devant le mur de brique du salon." loading="lazy" style="object-position: 45% 30%"></div><figcaption><span><b>Au fauteuil</b>Coupe et dégradé</span></figcaption></figure>
-        <figure class="rv clipw r45" style="--d:150ms"><div class="ph clip"><img src="assets/fauteuil.webp" srcset="assets/fauteuil-m.webp 800w, assets/fauteuil.webp 1600w" sizes="(min-width: 640px) 50vw, 100vw" width="1600" height="900" alt="Un client allongé dans le fauteuil pendant le soin, le barbier penché sur lui." loading="lazy" style="object-position: 35% 40%"></div><figcaption><span><b>Le soin</b>Serviette chaude, rasoir</span></figcaption></figure>
+        <figure data-cursor="voir" class="rv clipw r45"><div class="ph clip"><img src="assets/barbier.webp" srcset="assets/barbier-m.webp 800w, assets/barbier.webp 1600w" sizes="(min-width: 640px) 50vw, 100vw" width="1600" height="900" alt="Un barbier concentré sur sa coupe, devant le mur de brique du salon." loading="lazy" style="object-position: 45% 30%"></div><figcaption><span><b>Au fauteuil</b>Coupe et dégradé</span></figcaption></figure>
+        <figure data-cursor="voir" class="rv clipw r45" style="--d:150ms"><div class="ph clip"><img src="assets/fauteuil.webp" srcset="assets/fauteuil-m.webp 800w, assets/fauteuil.webp 1600w" sizes="(min-width: 640px) 50vw, 100vw" width="1600" height="900" alt="Un client allongé dans le fauteuil pendant le soin, le barbier penché sur lui." loading="lazy" style="object-position: 35% 40%"></div><figcaption><span><b>Le soin</b>Serviette chaude, rasoir</span></figcaption></figure>
       </div>
     </div>
   </section>
@@ -421,7 +496,7 @@ figcaption span:last-child { color: rgba(244,241,232,.7); }
   <!-- Le rituel -->
   <section class="sec dark" id="rituel" style="padding-top:0">
     <div class="wrap rituel">
-      <figure class="rv clipw r45"><div class="ph clip"><img src="assets/serviette.webp" srcset="assets/serviette-m.webp 800w, assets/serviette.webp 1600w" sizes="(min-width: 900px) 45vw, 100vw" width="1600" height="900" alt="Serviette chaude brodée posée sur le visage d'un client, les yeux fermés." loading="lazy" style="object-position: 50% 40%"></div><figcaption><span><b>La serviette chaude</b>Le moment où tout ralentit</span></figcaption></figure>
+      <figure data-cursor="voir" class="rv clipw r45" data-grow><div class="ph clip"><img src="assets/serviette.webp" srcset="assets/serviette-m.webp 800w, assets/serviette.webp 1600w" sizes="(min-width: 900px) 45vw, 100vw" width="1600" height="900" alt="Serviette chaude brodée posée sur le visage d'un client, les yeux fermés." loading="lazy" style="object-position: 50% 40%"></div><figcaption><span><b>La serviette chaude</b>Le moment où tout ralentit</span></figcaption></figure>
       <div>
         <p class="kicker rv f">Le rituel</p>
         <h2 class="disp h-lg split" data-split style="margin-top:1.2rem">Prendre le temps.</h2>
@@ -485,20 +560,21 @@ figcaption span:last-child { color: rgba(244,241,232,.7); }
     </div>
   </section>
 
-  <!-- Galerie -->
-  <section class="gal dark" aria-label="En salon">
-    <div class="wrap">
-      <div class="gal__head">
-        <div><p class="kicker rv f">En salon</p><h2 class="disp h-md split" data-split style="margin-top:.8rem">Rue Ranchin, au calme.</h2></div>
-        <div class="gal__nav"><button type="button" id="galPrev" aria-label="Précédent"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 8H3M7 4 3 8l4 4"/></svg></button><button type="button" id="galNext" aria-label="Suivant"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button></div>
+  <!-- Galerie 3D : un couloir de photos -->
+  <section class="g3d dark" id="galerie" aria-label="En salon">
+    <div class="g3d__stage">
+      <div class="g3d__head"><p class="kicker rv f">En salon</p><h2 class="disp h-md split" data-split style="margin-top:.8rem">Entrez, on avance.</h2></div>
+      <div class="g3d__world" id="world">
+        <figure class="wide" data-x="-14" data-y="-4" data-cap="L'enseigne" data-sub="Brique, laiton, lumière chaude"><div class="ph"><img src="assets/enseigne-2.webp" srcset="assets/enseigne-2-m.webp 800w, assets/enseigne-2.webp 1600w" sizes="36vw" width="1600" height="900" alt="L'enseigne rétroéclairée, le poteau de barbier et l'horloge murale." loading="lazy"></div></figure>
+        <figure class="tall" data-x="18" data-y="6" data-cap="La serviette chaude" data-sub="Le moment où tout ralentit"><div class="ph"><img src="assets/serviette.webp" srcset="assets/serviette-m.webp 800w, assets/serviette.webp 1600w" sizes="26vw" width="1600" height="900" alt="Serviette chaude brodée posée sur le visage d'un client." loading="lazy" style="object-position:50% 40%"></div></figure>
+        <figure class="sq" data-x="-20" data-y="8" data-cap="Aux ciseaux" data-sub="La finition"><div class="ph"><img src="assets/ciseaux.webp" srcset="assets/ciseaux-m.webp 800w, assets/ciseaux.webp 1600w" sizes="26vw" width="1600" height="900" alt="Gros plan sur les ciseaux et le peigne pendant une coupe." loading="lazy" style="object-position:40% 50%"></div></figure>
+        <figure class="wide" data-x="12" data-y="-8" data-cap="Le salon" data-sub="Vu de l'entrée"><div class="ph"><img src="assets/interieur.webp" srcset="assets/interieur-m.webp 800w, assets/interieur.webp 1600w" sizes="36vw" width="1600" height="900" alt="Le salon vu de l'entrée, brique et lampes à filament." loading="lazy"></div></figure>
+        <figure class="tall" data-x="-16" data-y="-2" data-cap="Le soin" data-sub="Serviette chaude, rasoir"><div class="ph"><img src="assets/fauteuil.webp" srcset="assets/fauteuil-m.webp 800w, assets/fauteuil.webp 1600w" sizes="26vw" width="1600" height="900" alt="Un client allongé dans le fauteuil pendant le soin." loading="lazy" style="object-position:35% 40%"></div></figure>
+        <figure class="sq" data-x="20" data-y="4" data-cap="Le poste" data-sub="Prêt"><div class="ph"><img src="assets/outils.webp" srcset="assets/outils-m.webp 800w, assets/outils.webp 1600w" sizes="26vw" width="1600" height="900" alt="Sabots, tondeuse et rasoir sur le tapis du poste." loading="lazy"></div></figure>
+        <figure class="wide" data-x="0" data-y="0" data-cap="Rue Ranchin" data-sub="L'Écusson, Montpellier"><div class="ph"><img src="assets/rue.webp" srcset="assets/rue-m.webp 800w, assets/rue.webp 1600w" sizes="36vw" width="1600" height="900" alt="La rue Ranchin, pierre claire et volets, l'enseigne au fond." loading="lazy" style="object-position:62% 50%"></div></figure>
       </div>
-      <div class="gal__track" id="gal">
-        <figure class="wide"><div class="ph"><img src="assets/enseigne-2.webp" srcset="assets/enseigne-2-m.webp 800w, assets/enseigne-2.webp 1600w" sizes="(min-width: 900px) 39rem, 88vw" width="1600" height="900" alt="L'enseigne rétroéclairée, le poteau de barbier et l'horloge murale sur la brique." loading="lazy"></div><figcaption><span><b>L'enseigne</b>Brique, laiton, lumière chaude</span></figcaption></figure>
-        <figure><div class="ph"><img src="assets/ciseaux.webp" srcset="assets/ciseaux-m.webp 800w, assets/ciseaux.webp 1600w" sizes="(min-width: 900px) 26rem, 78vw" width="1600" height="900" alt="Gros plan sur les ciseaux et le peigne pendant une coupe." loading="lazy" style="object-position: 40% 50%"></div><figcaption><span><b>Aux ciseaux</b>La finition</span></figcaption></figure>
-        <figure><div class="ph"><img src="assets/interieur.webp" srcset="assets/interieur-m.webp 800w, assets/interieur.webp 1600w" sizes="(min-width: 900px) 26rem, 78vw" width="1600" height="900" alt="Le salon vu de l'entrée, brique et lampes à filament." loading="lazy"></div><figcaption><span><b>Le salon</b>Vu de l'entrée</span></figcaption></figure>
-        <figure class="wide"><div class="ph"><img src="assets/rue.webp" srcset="assets/rue-m.webp 800w, assets/rue.webp 1600w" sizes="(min-width: 900px) 39rem, 88vw" width="1600" height="900" alt="La rue Ranchin, pierre claire et volets, l'enseigne au fond." loading="lazy" style="object-position: 62% 50%"></div><figcaption><span><b>Rue Ranchin</b>L'Écusson, Montpellier</span></figcaption></figure>
-        <figure><div class="ph"><img src="assets/outils.webp" srcset="assets/outils-m.webp 800w, assets/outils.webp 1600w" sizes="(min-width: 900px) 26rem, 78vw" width="1600" height="900" alt="Sabots, tondeuse et rasoir sur le tapis du poste." loading="lazy"></div><figcaption><span><b>Le poste</b>Prêt</span></figcaption></figure>
-      </div>
+      <div class="g3d__vig" aria-hidden="true"></div>
+      <div class="g3d__bar"><p class="g3d__cap" id="g3dCap" aria-live="polite"><b>L'enseigne</b>Brique, laiton, lumière chaude</p><div class="g3d__prog" aria-hidden="true"><i id="g3dProg"></i></div></div>
     </div>
   </section>
 
@@ -536,11 +612,24 @@ figcaption span:last-child { color: rgba(244,241,232,.7); }
         <div><dt>Contact</dt><dd><a href="tel:+33768066436">07 68 06 64 36</a><br><a href="https://www.instagram.com/sainte_anne_barber/" rel="noopener">@sainte_anne_barber</a></dd></div>
         <div><dt>Sans rendez-vous</dt><dd>Passez la porte, on vous prend dès qu'un fauteuil se libère.</dd></div>
       </dl>
-      <figure class="rv clipw r32"><div class="ph clip"><img src="assets/rue-2.webp" srcset="assets/rue-2-m.webp 800w, assets/rue-2.webp 1600w" sizes="100vw" width="1600" height="900" alt="La façade du salon dans la rue Ranchin, en plein jour." loading="lazy" style="object-position: 55% 55%; aspect-ratio: 21 / 9"></div><figcaption><span><b>La porte, rue Ranchin</b>À côté du Carré Sainte-Anne</span></figcaption></figure>
+      <div class="gift rv f">
+        <div><b>Offrir un moment.</b><p>Une coupe, une barbe, un soin : la carte cadeau se prépare au salon ou par téléphone, au montant que vous voulez.</p></div>
+        <a class="btn btn--ghost btn--plain" href="tel:+33768066436">07 68 06 64 36</a>
+      </div>
+      <figure data-cursor="voir" class="rv clipw r32" data-grow><div class="ph clip"><img src="assets/rue-2.webp" srcset="assets/rue-2-m.webp 800w, assets/rue-2.webp 1600w" sizes="100vw" width="1600" height="900" alt="La façade du salon dans la rue Ranchin, en plein jour." loading="lazy" style="object-position: 55% 55%; aspect-ratio: 21 / 9"></div><figcaption><span><b>La porte, rue Ranchin</b>À côté du Carré Sainte-Anne</span></figcaption></figure>
     </div>
   </section>
 
 </main>
+
+<div class="bar" id="bar" aria-label="Réserver">
+  <span class="live" data-live></span>
+  <div class="bar__r">
+    <a class="bar__tel" href="tel:+33768066436" aria-label="Appeler le salon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></a>
+    <a class="btn btn--solid btn--plain" href="https://www.planity.com/sainte-anne-barber-34000-montpellier" rel="noopener">Réserver</a>
+  </div>
+</div>
+<div class="cur" id="cur" aria-hidden="true"><span>Voir</span></div>
 
 <footer class="foot dark">
   <div class="wrap foot__in">
@@ -553,6 +642,7 @@ figcaption span:last-child { color: rgba(244,241,232,.7); }
   </div>
 </footer>
 
+<script src="assets/lenis.min.js"></script>
 <script>
 (function () {
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -622,10 +712,89 @@ figcaption span:last-child { color: rgba(244,241,232,.7); }
     })();
   }
 
-  /* galerie : flèches */
-  var gal = document.getElementById('gal');
-  document.getElementById('galPrev').addEventListener('click', function () { gal.scrollBy({ left: -gal.clientWidth * 0.7, behavior: 'smooth' }); });
-  document.getElementById('galNext').addEventListener('click', function () { gal.scrollBy({ left: gal.clientWidth * 0.7, behavior: 'smooth' }); });
+  /* scroll à inertie (Lenis), sauf mouvement réduit */
+  var lenis = null;
+  if (!reduced && window.Lenis) {
+    lenis = new Lenis({ lerp: 0.085, wheelMultiplier: 1, smoothWheel: true });
+    (function raf(t) { lenis.raf(t); requestAnimationFrame(raf); })(0);
+    document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+      a.addEventListener('click', function (e) { var id = a.getAttribute('href'); var el = id.length > 1 && document.querySelector(id); if (el) { e.preventDefault(); lenis.scrollTo(el, { offset: -72, duration: 1.4 }); } });
+    });
+  }
+
+  /* galerie 3D : la caméra avance dans le couloir */
+  var g3d = document.getElementById('galerie'), world = document.getElementById('world'), cap = document.getElementById('g3dCap'), prog = document.getElementById('g3dProg');
+  var figs = Array.prototype.slice.call(world.querySelectorAll('figure'));
+  var STEP = 560, DEPTH = STEP * (figs.length - 1), lastCap = -1;
+  function layoutG3d() {
+    if (reduced) return;
+    var r = g3d.getBoundingClientRect(), vh = window.innerHeight;
+    var p = Math.min(1, Math.max(0, -r.top / (r.height - vh)));
+    var cam = p * (DEPTH + 300) - 200;
+    var vw = window.innerWidth, mob = vw < 900;
+    var near = 0, nearD = 1e9;
+    figs.forEach(function (f, i) {
+      var z = cam - i * STEP;
+      var x = parseFloat(f.getAttribute('data-x')) * (mob ? 0.55 : 1), y = parseFloat(f.getAttribute('data-y'));
+      var op = z > 120 ? Math.max(0, 1 - (z - 120) / 320) : z < -3000 ? Math.max(0, 1 - (-3000 - z) / 800) : 1;
+      f.style.transform = 'translate(-50%, -50%) translate3d(' + x + 'vw, ' + y + 'vh, ' + z + 'px)';
+      f.style.opacity = op.toFixed(3);
+      f.style.zIndex = Math.round(z + 4000);
+      var d = Math.abs(z + 120); if (d < nearD) { nearD = d; near = i; }
+    });
+    if (near !== lastCap) { lastCap = near; cap.innerHTML = '<b>' + figs[near].getAttribute('data-cap') + '</b>' + figs[near].getAttribute('data-sub'); }
+    prog.style.transform = 'scaleX(' + p.toFixed(3) + ')';
+  }
+
+  /* entrées pilotées au scroll */
+  var grows = Array.prototype.slice.call(document.querySelectorAll('[data-grow]'));
+  function layoutGrow() {
+    var vh = window.innerHeight;
+    grows.forEach(function (el) { var r = el.getBoundingClientRect(); var p = Math.min(1, Math.max(0, (vh - r.top) / (vh * 0.7))); el.style.setProperty('--p', p.toFixed(3)); });
+  }
+
+  /* barre mobile */
+  var bar = document.getElementById('bar');
+  function layoutBar() { bar.classList.toggle('on', window.scrollY > window.innerHeight * 0.85); }
+
+  var tickLast = -1;
+  (function tick() {
+    var y = window.scrollY;
+    if (y !== tickLast) { tickLast = y; layoutG3d(); layoutGrow(); layoutBar(); }
+    requestAnimationFrame(tick);
+  })();
+  window.addEventListener('resize', function () { tickLast = -1; });
+
+  /* état en direct : lundi à samedi, 9h à 19h, heure de Paris */
+  (function live() {
+    var els = document.querySelectorAll('[data-live]'); if (!els.length) return;
+    function paint() {
+      var now = new Date(), parts = {};
+      try { new Intl.DateTimeFormat('fr-FR', { timeZone: 'Europe/Paris', weekday: 'short', hour: 'numeric', minute: 'numeric', hour12: false }).formatToParts(now).forEach(function (x) { parts[x.type] = x.value; }); } catch (e) { return; }
+      var day = (parts.weekday || '').toLowerCase().slice(0, 3), h = parseInt(parts.hour, 10), m = parseInt(parts.minute, 10);
+      var sunday = day.indexOf('dim') === 0, open = !sunday && (h > 9 || (h === 9)) && h < 19;
+      var txt;
+      if (open) txt = h >= 18 ? 'Ouvert · ferme à 19h' : 'Ouvert · jusqu\'à 19h';
+      else if (sunday) txt = 'Fermé · ouvre lundi 9h';
+      else if (h < 9) txt = 'Fermé · ouvre à 9h';
+      else txt = day.indexOf('sam') === 0 ? 'Fermé · ouvre lundi 9h' : 'Fermé · ouvre demain 9h';
+      els.forEach(function (el) { el.textContent = txt; el.classList.toggle('is-closed', !open); });
+    }
+    paint(); setInterval(paint, 60000);
+  })();
+
+  /* curseur */
+  var cur = document.getElementById('cur');
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches && !reduced) {
+    var cx = 0, cy = 0, tx = 0, ty = 0;
+    window.addEventListener('pointermove', function (e) { tx = e.clientX; ty = e.clientY; cur.style.opacity = 1; }, { passive: true });
+    (function follow() { cx += (tx - cx) * 0.22; cy += (ty - cy) * 0.22; cur.style.left = cx + 'px'; cur.style.top = cy + 'px'; requestAnimationFrame(follow); })();
+    document.addEventListener('pointerover', function (e) {
+      var t = e.target;
+      cur.classList.toggle('is-voir', !!t.closest('[data-cursor="voir"], .g3d__world figure'));
+      cur.classList.toggle('is-link', !!t.closest('a, button') && !t.closest('[data-cursor="voir"]'));
+    });
+  }
 
 
   /* le réel : joue dans la carte dès l'arrivée ; sans fichier, la photo reste */
