@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sainte-Anne Barber · Coiffeur et barbier, Montpellier centre</title>
+<meta name="description" content="Coiffeur et barbier au 10 rue Ranchin, dans l'Écusson de Montpellier. Coupe, barbe, soins du visage. Du lundi au samedi, 9h à 19h. Réservation sur Planity.">
+<meta property="og:title" content="Sainte-Anne Barber · Coiffeur et barbier, Montpellier centre">
+<meta property="og:description" content="Coupe, barbe, soins. 10 rue Ranchin, à l'ombre du Carré Sainte-Anne.">
+<meta property="og:image" content="https://barber-saint-anne.vercel.app/assets/enseigne.webp">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0C0B0A">
+<link rel="icon" href="assets/logo-m.png" type="image/png">
+<link rel="preload" href="assets/fonts/BodoniModa-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/Geist-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="scrollcraft.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BarberShop","name":"Sainte-Anne Barber","image":"https://barber-saint-anne.vercel.app/assets/enseigne.webp","telephone":"+33768066436","address":{"@type":"PostalAddress","streetAddress":"10 rue Ranchin","postalCode":"34000","addressLocality":"Montpellier","addressCountry":"FR"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"09:00","closes":"19:00"}],"priceRange":"15 € - 45 €","url":"https://barber-saint-anne.vercel.app","sameAs":["https://www.instagram.com/sainte_anne_barber/","https://www.planity.com/sainte-anne-barber-34000-montpellier"]}
+</script>
+<style>
+@font-face { font-family: "Bodoni Moda"; font-style: normal; font-weight: 400 500; font-display: swap; src: url("assets/fonts/BodoniModa-normal.woff2") format("woff2"); }
+@font-face { font-family: "Bodoni Moda"; font-style: italic; font-weight: 400; font-display: swap; src: url("assets/fonts/BodoniModa-italic.woff2") format("woff2"); }
+@font-face { font-family: "Geist"; font-style: normal; font-weight: 400 500; font-display: swap; src: url("assets/fonts/Geist-normal.woff2") format("woff2"); }
+:root {
+  --sc-canvas:      #0C0B0A;
+  --sc-surface:     #171412;
+  --sc-ink:         #EFE8DC;
+  --sc-ink-soft:    #A69D90;
+  --sc-accent:      #E3B266;
+  --sc-accent-ink:  #0C0B0A;
+  --sc-font-display: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
+  --sc-font-text:    "Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --sc-font-mono:    "Geist", system-ui, sans-serif;
+  --sc-shadow-color: 30 30% 3%;
+  --sc-track-tight: -0.025em;
+  --sc-leading-none: 0.98;
+  --sc-r-sm: 2px; --sc-r-md: 2px; --sc-r-lg: 2px;
+  --pierre: #E6E0D4; --encre: #141210; --encre-douce: #4F4A42;
+}
+html { scroll-behavior: auto; }
+body { background: var(--sc-canvas); }
+
+/* ---- typographic voice ---- */
+.sc-display { font-weight: 400; font-variation-settings: "opsz" 96; }
+.sc-display--md { font-variation-settings: "opsz" 48; }
+.display-em { font-style: italic; font-weight: 400; }
+.sc-body { font-size: var(--sc-t-base); line-height: 1.62; }
+.sc-body strong { color: var(--sc-ink); font-weight: 500; }
+.sc-label { font-family: var(--sc-font-text); font-weight: 500; letter-spacing: 0.1em; }
+.run {
+  color: var(--sc-ink); text-decoration: none; font-weight: 500;
+  display: inline-block; position: relative; padding-bottom: 0.15em;
+}
+.run::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px;
+  background: var(--sc-accent); transform-origin: left; transform: scaleX(0.28);
+  transition: transform 180ms var(--sc-ease-out);
+}
+@media (hover: hover) and (pointer: fine) { .run:hover::after { transform: scaleX(1); } }
+.run:active { transform: translateY(1px); }
+.skip { position: absolute; left: -999px; top: 0; }
+.skip:focus { left: var(--sc-gutter); top: var(--sc-4); z-index: 99; background: var(--sc-accent); color: var(--sc-accent-ink); padding: .5rem .75rem; }
+
+/* ---- folio: the only chrome ---- */
+.folio {
+  position: fixed; z-index: var(--sc-z-chrome); pointer-events: none;
+  left: var(--sc-gutter); top: var(--sc-5);
+  display: grid; gap: var(--sc-2);
+  font-size: var(--sc-t-xs); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500;
+  color: var(--sc-ink-soft);
+}
+.folio a { pointer-events: auto; }
+.folio__mark { color: var(--sc-ink); }
+.folio__chapter { display: grid; grid-template-columns: 1.6rem auto; gap: .5rem; align-items: baseline; }
+.folio__chapter i { font-family: var(--sc-font-display); font-style: normal; font-size: 1.05rem; letter-spacing: 0; color: var(--sc-accent); text-transform: none; }
+.folio__chapter span { transition: opacity 240ms var(--sc-ease-out); }
+.folio__cta {
+  position: fixed; z-index: var(--sc-z-chrome); right: var(--sc-gutter); top: var(--sc-5);
+  font-size: var(--sc-t-sm); letter-spacing: 0;
+}
+.on-light .folio, .on-light .folio__cta .run { color: var(--encre); }
+.on-light .folio__mark { color: var(--encre); }
+.on-light .folio__chapter i { color: var(--encre); }
+@media (max-width: 860px) {
+  .folio { top: var(--sc-4); }
+  .folio__cta {
+    top: auto; bottom: max(var(--sc-4), env(safe-area-inset-bottom)); right: var(--sc-gutter);
+    padding: .6rem .9rem; background: color-mix(in oklab, var(--sc-canvas) 82%, transparent);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--sc-hairline);
+  }
+  .on-light .folio__cta { background: color-mix(in oklab, var(--pierre) 88%, transparent); border-color: color-mix(in oklab, var(--encre) 18%, transparent); }
+}
+
+/* ---- title page ---- */
+.title {
+  min-height: 100svh; display: grid; align-content: end;
+  padding: calc(var(--sc-section) + 3rem) var(--sc-gutter) var(--sc-8);
+  position: relative; isolation: isolate;
+}
+.title__mark { width: clamp(9rem, 16vw, 15rem); mix-blend-mode: screen; margin-bottom: var(--sc-7); }
+.title h1 { max-width: 12ch; }
+.title__bar { margin-top: var(--sc-5); font-size: var(--sc-t-sm); letter-spacing: 0.26em; text-transform: uppercase; color: var(--sc-ink-soft); font-weight: 500; }
+.title__lede { margin-top: var(--sc-6); max-width: 40ch; color: var(--sc-ink-soft); }
+.title__cta { margin-top: var(--sc-6); }
+.title__glow {
+  position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: radial-gradient(60% 45% at 78% 35%, color-mix(in oklab, var(--sc-accent) 14%, transparent), transparent 70%);
+}
+
+/* ---- chapters ---- */
+.chapter { padding-block: var(--sc-section); position: relative; }
+.chapter--surface { background: var(--sc-surface); }
+.chapter__head { display: grid; gap: var(--sc-4); margin-bottom: var(--sc-8); max-width: 60rem; }
+.chapter__num { font-family: var(--sc-font-display); font-size: var(--sc-t-xl); color: var(--sc-accent); line-height: 1; }
+.grid { display: grid; gap: var(--sc-7); grid-template-columns: 1fr; align-items: start; }
+@media (min-width: 900px) { .grid { grid-template-columns: 1.15fr 1fr; gap: var(--sc-9); } .grid--flip > :first-child { order: 2; } }
+figure { margin: 0; }
+figure img { width: 100%; height: auto; }
+figcaption { margin-top: var(--sc-3); font-size: var(--sc-t-xs); letter-spacing: 0.08em; text-transform: uppercase; color: var(--sc-ink-soft); }
+.media { overflow: clip; }
+.media img { display: block; }
+.media--tall img { aspect-ratio: 4 / 5; object-fit: cover; }
+.media--wide img { aspect-ratio: 16 / 10; object-fit: cover; }
+.stack > * + * { margin-top: var(--sc-5); }
+.stack p + p { margin-top: var(--sc-4); }
+.duo { display: grid; gap: var(--sc-5); grid-template-columns: 1fr; margin-top: var(--sc-8); }
+@media (min-width: 700px) { .duo { grid-template-columns: 1fr 1fr; align-items: end; } .duo > :last-child { margin-top: var(--sc-9); } }
+
+/* intertitle: authored silence */
+.inter { min-height: 80svh; display: grid; place-content: center; text-align: center; gap: var(--sc-3); padding-inline: var(--sc-gutter); }
+.inter .chapter__num { font-size: var(--sc-t-2xl); }
+.inter h2 { font-family: var(--sc-font-display); font-weight: 400; font-size: var(--sc-t-lg); letter-spacing: 0; margin: 0; color: var(--sc-ink-soft); font-style: italic; }
+
+/* ---- the peak: the fogged mirror ---- */
+.mirror { isolation: isolate; background: #0A0908; }
+.mirror__layer { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.mirror__towel { z-index: 0; }
+.mirror__towel-blur { z-index: 1; opacity: 0; transform-origin: 50% 40%; will-change: transform, opacity; }
+.mirror__blade { z-index: 2; opacity: 0; transform-origin: 55% 45%; }
+.mirror__fog {
+  position: absolute; inset: 0; z-index: 3; opacity: 0; pointer-events: none;
+  background: #D8D1C4;
+}
+.mirror__fog::before {
+  content: ""; position: absolute; inset: -20%; transform: translate(calc(var(--drift, 0px) * -0.6), calc(var(--drift, 0px) * 0.35)); will-change: transform;
+  background:
+    radial-gradient(38% 46% at 22% 28%, rgba(255,255,255,.55), transparent 70%),
+    radial-gradient(34% 40% at 78% 68%, rgba(255,255,255,.42), transparent 70%),
+    radial-gradient(60% 60% at 50% 50%, rgba(120,112,100,.28), transparent 75%);
+}
+.mirror__line {
+  position: absolute; z-index: 4; left: var(--sc-gutter); right: var(--sc-gutter); bottom: clamp(3.5rem, 14vh, 9rem);
+  margin: 0; font-family: var(--sc-font-display); font-style: italic; font-weight: 400;
+  font-size: clamp(2.2rem, 6.4vw, 5.6rem); line-height: 1.02; letter-spacing: -0.02em;
+  color: #1E1B17; text-wrap: balance; max-width: 14ch; font-variation-settings: "opsz" 96;
+}
+.mirror__line .w { display: inline-block; white-space: nowrap; }
+.mirror__line .w span { display: inline-block; opacity: 0; will-change: opacity, transform, filter; }
+.mirror__after {
+  position: absolute; z-index: 5; left: var(--sc-gutter); bottom: clamp(3.5rem, 14vh, 9rem);
+  max-width: 34ch; margin: 0; color: var(--sc-ink); opacity: 0; will-change: opacity, transform;
+  font-size: var(--sc-t-lg); line-height: 1.4; letter-spacing: -0.01em;
+}
+.mirror__after strong { font-family: var(--sc-font-display); font-weight: 400; font-style: italic; font-size: 1.35em; display: block; margin-bottom: .35em; }
+.mirror__scrim { position: absolute; inset: 0; z-index: 4; pointer-events: none; opacity: 0;
+  background: linear-gradient(to top right, color-mix(in oklab, #0A0908 92%, transparent) 0%, color-mix(in oklab, #0A0908 60%, transparent) 34%, transparent 64%); }
+.mirror__cap {
+  position: absolute; z-index: 5; right: var(--sc-gutter); bottom: var(--sc-5); margin: 0; opacity: 0;
+  font-size: var(--sc-t-xs); letter-spacing: 0.1em; text-transform: uppercase; color: var(--sc-ink-soft);
+}
+@media (max-width: 860px) {
+  .mirror__line { max-width: none; bottom: clamp(4.5rem, 18vh, 9rem); }
+  .mirror__after { bottom: 5.5rem; max-width: none; right: var(--sc-gutter); }
+  .mirror__cap { display: none; }
+}
+
+/* ---- la carte: museum labels ---- */
+.carte { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--sc-hairline-strong); }
+.carte li {
+  display: grid; grid-template-columns: 1fr auto auto; gap: var(--sc-5); align-items: baseline;
+  padding: var(--sc-4) 0; border-bottom: 1px solid var(--sc-hairline); position: relative;
+}
+.carte li::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; background: var(--sc-accent); transform: scaleX(0); transform-origin: left; transition: transform 160ms var(--sc-ease-out); }
+@media (hover: hover) and (pointer: fine) { .carte li:hover::after { transform: scaleX(1); } }
+.carte b { font-family: var(--sc-font-display); font-weight: 400; font-size: var(--sc-t-lg); letter-spacing: -0.01em; }
+.carte small { color: var(--sc-ink-soft); font-size: var(--sc-t-sm); }
+.carte .prix { font-variant-numeric: tabular-nums; font-weight: 500; }
+.carte__note { margin-top: var(--sc-5); }
+@media (max-width: 520px) { .carte li { grid-template-columns: 1fr auto; } .carte small { grid-column: 1; margin-top: -0.6rem; } }
+
+/* ---- les mains ---- */
+.quotes { display: grid; gap: var(--sc-7); margin-top: var(--sc-8); }
+@media (min-width: 900px) { .quotes { grid-template-columns: repeat(3, 1fr); gap: var(--sc-7); } }
+blockquote { margin: 0; font-family: var(--sc-font-display); font-weight: 400; font-size: var(--sc-t-xl); line-height: 1.12; letter-spacing: -0.015em; text-wrap: balance; font-variation-settings: "opsz" 48; }
+blockquote cite { display: block; margin-top: var(--sc-3); font-family: var(--sc-font-text); font-style: normal; font-size: var(--sc-t-xs); letter-spacing: 0.08em; text-transform: uppercase; color: var(--sc-ink-soft); }
+.note { display: block; margin-top: var(--sc-7); color: var(--sc-ink-soft); }
+.note a { color: var(--sc-ink); }
+
+/* ---- colophon: daylight ---- */
+.colophon {
+  background: var(--pierre); color: var(--encre);
+  --sc-ink: var(--encre); --sc-ink-soft: var(--encre-douce);
+  --sc-hairline: color-mix(in oklab, var(--encre) 14%, transparent);
+  display: grid; align-content: center;
+  padding: calc(var(--sc-section) * 1.1) var(--sc-gutter) calc(var(--sc-section) * 0.9);
+}
+.colophon a { color: var(--encre); }
+.colophon .run::after { background: var(--encre); }
+.colophon__grid { display: grid; gap: var(--sc-8); grid-template-columns: 1fr; max-width: var(--sc-maxw); margin-inline: auto; width: 100%; }
+@media (min-width: 900px) { .colophon__grid { grid-template-columns: 1.2fr 1fr; align-items: end; } }
+.colophon__run { font-family: var(--sc-font-display); font-weight: 400; font-size: var(--sc-t-xl); line-height: 1.3; letter-spacing: -0.01em; max-width: 26ch; margin: 0; font-variation-settings: "opsz" 48; }
+.colophon__run a { text-decoration: none; border-bottom: 1px solid var(--encre); }
+.colophon__small { margin-top: var(--sc-7); display: grid; gap: var(--sc-2); font-size: var(--sc-t-sm); color: var(--encre-douce); }
+.colophon__small a { color: var(--encre-douce); }
+.colophon__end { margin-top: var(--sc-8); font-family: var(--sc-font-display); font-style: italic; font-size: var(--sc-t-2xl); line-height: 1; letter-spacing: -0.02em; }
+.colophon .media img { aspect-ratio: 4 / 5; object-fit: cover; }
+.colophon .sc-grain-off { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .mirror__line span { filter: none !important; transform: none !important; }
+  .mirror__blade { transform: none !important; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#lieu">Aller au contenu</a>
+<div class="sc-grain" aria-hidden="true"></div>
+
+<aside class="folio" aria-label="Repère de chapitre">
+  <span class="folio__mark">Sainte-Anne Barber</span>
+  <span class="folio__chapter"><i id="folio-num" aria-hidden="true"></i><span id="folio-title">Montpellier centre</span></span>
+</aside>
+<div class="folio__cta"><a class="run" href="https://www.planity.com/sainte-anne-barber-34000-montpellier" rel="noopener">Réserver un créneau</a></div>
+
+<main id="top">
+
+  <!-- 0 · Page de titre. Type sur l'encre, pas de vidéo. -->
+  <header class="title" data-sc-act="flow" data-chapter="" data-chapter-title="Montpellier centre">
+    <div class="title__glow" aria-hidden="true"></div>
+    <div data-sc-in data-sc-stagger="60">
+      <img class="title__mark" src="assets/logo.png" width="1200" height="848" alt="Logo Sainte-Anne Barber : la flèche de l'église Sainte-Anne, des ciseaux et un peigne croisés.">
+      <h1 class="sc-display sc-display--xl">Sainte-Anne <span class="display-em">Barber</span></h1>
+      <p class="title__bar">Coiffeur &amp; barbier · Montpellier centre</p>
+      <p class="title__lede sc-body">Coupe, barbe, soins du visage. 10 rue Ranchin, dans l'Écusson, à l'ombre du Carré Sainte-Anne. Avec ou sans rendez-vous.</p>
+      <p class="title__cta"><a class="run" href="https://www.planity.com/sainte-anne-barber-34000-montpellier" rel="noopener">Réserver un créneau</a></p>
+    </div>
+  </header>
+
+  <!-- I · Le lieu -->
+  <section class="chapter" id="lieu" data-sc-act="flow" data-chapter="I" data-chapter-title="Le lieu">
+    <div class="sc-wrap">
+      <div class="chapter__head" data-sc-in data-sc-stagger="70">
+        <span class="chapter__num" aria-hidden="true">I</span>
+        <h2 class="sc-display sc-display--lg">À l'ombre du Carré Sainte-Anne.</h2>
+      </div>
+      <div class="grid">
+        <figure class="media media--tall" data-sc-reveal="up" data-sc-reveal-at="0.12 0.42">
+          <img src="assets/enseigne.webp" srcset="assets/enseigne-m.webp 800w, assets/enseigne.webp 1600w" sizes="(min-width: 900px) 50vw, 100vw" width="1600" height="900" alt="L'enseigne Sainte-Anne Barber rétroéclairée sur le mur noir du salon, brique rouge et lampes à filament." loading="lazy" data-sc-parallax="-0.5">
+          <figcaption>Le salon, rue Ranchin</figcaption>
+        </figure>
+        <div class="stack" data-sc-in data-sc-stagger="70">
+          <p class="sc-lede">Une rue étroite de l'Écusson, entre les ateliers et les galeries du quartier Sainte-Anne.</p>
+          <p class="sc-body">Le salon a ouvert en novembre 2025 et n'a pas cherché à faire de bruit. De la brique, du cuir noir, des lampes à filament, et le temps de faire les choses proprement.</p>
+          <p class="sc-body">Du lundi au samedi, de 9h à 19h. Vous pouvez réserver, ou pousser la porte.</p>
+        </div>
+      </div>
+      <div class="duo">
+        <figure class="media media--wide" data-sc-reveal="left" data-sc-reveal-at="0.45 0.72">
+          <img src="assets/rue.webp" srcset="assets/rue-m.webp 800w, assets/rue.webp 1600w" sizes="(min-width: 700px) 50vw, 100vw" width="1600" height="900" alt="La rue Ranchin, pierre claire et volets, avec l'enseigne du salon au fond." loading="lazy">
+          <figcaption>Rue Ranchin, l'Écusson</figcaption>
+        </figure>
+        <figure class="media media--wide" data-sc-reveal="left" data-sc-reveal-at="0.55 0.82">
+          <img src="assets/salon.webp" srcset="assets/salon-m.webp 800w, assets/salon.webp 1600w" sizes="(min-width: 700px) 50vw, 100vw" width="1600" height="900" alt="L'intérieur du salon : miroirs, brique, fauteuils noirs, lumière chaude." loading="lazy">
+          <figcaption>Deux fauteuils, un miroir chacun</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- · Intertitre : silence voulu avant le pic -->
+  <section class="inter" data-sc-act="flow" aria-label="Chapitre II">
+    <span class="chapter__num" aria-hidden="true" data-sc-cue="0.25 0.9">II</span>
+    <h2 data-sc-cue="0.3 0.9">Le geste</h2>
+  </section>
+
+  <!-- II · Le geste : le miroir embué. Le pic, la plus grande travée. -->
+  <section class="peak" id="geste" data-sc-act="pin" data-sc-span="3" data-chapter="II" data-chapter-title="Le geste" aria-label="Le geste">
+    <div data-sc-stage class="sc-stage mirror" id="mirror">
+      <img class="mirror__layer mirror__towel" src="assets/serviette.webp" srcset="assets/serviette-m.webp 800w, assets/serviette.webp 1600w" sizes="100vw" width="1600" height="900" alt="Une serviette chaude brodée Sainte-Anne Barber posée sur le visage d'un client.">
+      <img class="mirror__layer mirror__towel-blur" id="towelBlur" src="assets/serviette-blur.webp" srcset="assets/serviette-blur-m.webp 800w, assets/serviette-blur.webp 1600w" sizes="100vw" width="1600" height="900" alt="" aria-hidden="true">
+      <img class="mirror__layer mirror__blade" id="blade" src="assets/ciseaux.webp" srcset="assets/ciseaux-m.webp 800w, assets/ciseaux.webp 1600w" sizes="100vw" width="1600" height="900" alt="Gros plan sur les ciseaux et le peigne pendant une coupe, la main tatouée du barbier." loading="lazy">
+      <div class="mirror__fog" id="fog" aria-hidden="true"></div>
+      <div class="mirror__scrim" id="mirrorScrim" aria-hidden="true"></div>
+      <p class="mirror__line" id="line" aria-label="Pas besoin de trouver les mots."></p>
+      <p class="mirror__after" id="after"><strong>Puis on coupe. Net.</strong>On regarde la forme du visage, l'implantation, la façon dont vous portez vos cheveux. On écoute ce que vous n'arrivez pas à décrire.</p>
+      <p class="mirror__cap" id="cap">Coupe aux ciseaux, finition à la lame</p>
+    </div>
+  </section>
+
+  <!-- III · La carte -->
+  <section class="chapter chapter--surface" id="carte" data-sc-act="flow" data-chapter="III" data-chapter-title="La carte">
+    <div class="sc-wrap">
+      <div class="chapter__head" data-sc-in data-sc-stagger="70">
+        <span class="chapter__num" aria-hidden="true">III</span>
+        <h2 class="sc-display sc-display--lg">La carte.</h2>
+        <p class="sc-body">Des prix simples, affichés. Le soin visage et la boisson s'ajoutent à n'importe quelle formule.</p>
+      </div>
+      <div class="grid grid--flip">
+        <div>
+          <ul class="carte" data-sc-in data-sc-stagger="60">
+            <li><b>Coupe</b><small>30 min</small><span class="prix">25 €</span></li>
+            <li><b>Coupe et barbe</b><small>40 min</small><span class="prix">35 €</span></li>
+            <li><b>Barbe</b><small>15 min</small><span class="prix">15 €</span></li>
+            <li><b>Barbe et soin</b><small>huile, serviette chaude</small><span class="prix">20 €</span></li>
+            <li><b>Coupe, barbe et soin visage</b><small>black mask</small><span class="prix">45 €</span></li>
+            <li><b>Coupe étudiant</b><small>sur présentation de la carte</small><span class="prix">20 €</span></li>
+            <li><b>Coupe et barbe étudiant</b><small>sur présentation de la carte</small><span class="prix">30 €</span></li>
+            <li><b>Coupe enfant</b><small>moins de 15 ans</small><span class="prix">18 €</span></li>
+          </ul>
+          <p class="carte__note sc-body">Boisson healthy en option, 3 €. Cire nez ou oreilles, soin visage complet : <a class="run" href="https://www.planity.com/sainte-anne-barber-34000-montpellier" rel="noopener">voir la carte complète</a>.</p>
+        </div>
+        <figure class="media media--tall" data-sc-reveal="up" data-sc-reveal-at="0.2 0.5">
+          <img src="assets/outils.webp" srcset="assets/outils-m.webp 800w, assets/outils.webp 1600w" sizes="(min-width: 900px) 45vw, 100vw" width="1600" height="900" alt="Sabots de tondeuse, tondeuse et rasoir posés sur le tapis du poste de travail." loading="lazy">
+          <figcaption>Le poste, prêt</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- IV · Les mains -->
+  <section class="chapter" id="mains" data-sc-act="flow" data-chapter="IV" data-chapter-title="Les mains">
+    <div class="sc-wrap">
+      <div class="chapter__head" data-sc-in data-sc-stagger="70">
+        <span class="chapter__num" aria-hidden="true">IV</span>
+        <h2 class="sc-display sc-display--lg">Tony et Loïc.</h2>
+        <p class="sc-body">Deux barbiers, une façon de travailler : on écoute d'abord, on propose ensuite, et on ne lâche pas la finition.</p>
+      </div>
+      <div class="grid">
+        <figure class="media media--wide" data-sc-reveal="up" data-sc-reveal-at="0.15 0.45">
+          <img src="assets/barbier.webp" srcset="assets/barbier-m.webp 800w, assets/barbier.webp 1600w" sizes="(min-width: 900px) 55vw, 100vw" width="1600" height="900" alt="Un barbier concentré sur sa coupe, devant le mur de brique du salon." loading="lazy">
+          <figcaption>Au fauteuil, rue Ranchin</figcaption>
+        </figure>
+        <figure class="media media--tall" data-sc-reveal="up" data-sc-reveal-at="0.25 0.55">
+          <img src="assets/fauteuil.webp" srcset="assets/fauteuil-m.webp 800w, assets/fauteuil.webp 1600w" sizes="(min-width: 900px) 40vw, 100vw" width="1600" height="900" alt="Un client allongé dans le fauteuil pendant le soin, le barbier penché sur lui." loading="lazy" data-sc-parallax="-0.4">
+          <figcaption>Le soin, avant la coupe</figcaption>
+        </figure>
+      </div>
+      <div class="quotes" data-sc-in data-sc-stagger="90">
+        <blockquote>« Il a su mettre une coupe là où je ne trouvais pas les mots. »<cite>Avis Google</cite></blockquote>
+        <blockquote>« Propre, à l'écoute et coupe nickel. »<cite>Avis Planity</cite></blockquote>
+        <blockquote>« Ambiance feutrée et accueil chaleureux. »<cite>Avis Planity</cite></blockquote>
+      </div>
+      <p class="note sc-body">Noté 5,0 sur 5 sur Google et 4,9 sur Planity. <a href="https://www.instagram.com/sainte_anne_barber/" rel="noopener">Le salon sur Instagram</a>.</p>
+    </div>
+  </section>
+
+  <!-- Colophon : la lumière du jour, et ça reste allumé -->
+  <footer class="colophon" id="colophon" data-sc-act="flow" data-chapter="" data-chapter-title="Rue Ranchin" data-light>
+    <div class="colophon__grid">
+      <div data-sc-in data-sc-stagger="60">
+        <p class="colophon__run">Sainte-Anne Barber, 10 rue Ranchin, 34000 Montpellier. Du lundi au samedi, de 9h à 19h. <a href="tel:+33768066436">07 68 06 64 36</a>. <a href="https://www.planity.com/sainte-anne-barber-34000-montpellier" rel="noopener">Réserver un créneau</a>.</p>
+        <div class="colophon__small">
+          <span>Fermé le dimanche.</span>
+          <span><a href="https://maps.google.com/?q=10+rue+Ranchin+34000+Montpellier" rel="noopener">Itinéraire</a> · <a href="https://www.instagram.com/sainte_anne_barber/" rel="noopener">Instagram</a></span>
+          <span>© Sainte-Anne Barber, Montpellier</span>
+        </div>
+        <p class="colophon__end">À demain, 9h.</p>
+      </div>
+      <figure class="media" data-sc-reveal="up" data-sc-reveal-at="0.2 0.5">
+        <img src="assets/rue-2.webp" srcset="assets/rue-2-m.webp 800w, assets/rue-2.webp 1600w" sizes="(min-width: 900px) 40vw, 100vw" width="1600" height="900" alt="La façade du salon dans la rue Ranchin, en plein jour." loading="lazy">
+        <figcaption>La porte, en plein jour</figcaption>
+      </figure>
+    </div>
+  </footer>
+
+</main>
+
+<script src="scrollcraft.js"></script>
+<script>
+ScrollCraft.mount(document.body);
+
+(function () {
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- folio: chapter numeral + title follow the reader ---- */
+  var num = document.getElementById('folio-num'), title = document.getElementById('folio-title');
+  var sections = Array.prototype.slice.call(document.querySelectorAll('[data-chapter]'));
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        num.textContent = e.target.getAttribute('data-chapter') || '';
+        title.textContent = e.target.getAttribute('data-chapter-title') || '';
+        document.body.classList.toggle('on-light', e.target.hasAttribute('data-light'));
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    sections.forEach(function (s) { io.observe(s); });
+  }
+
+  /* ---- the signature move: the fogged mirror, driven from --sc-p ---- */
+  var act = document.getElementById('geste');
+  var fog = document.getElementById('fog'), blur = document.getElementById('towelBlur'), blade = document.getElementById('blade');
+  var line = document.getElementById('line'), after = document.getElementById('after'), cap = document.getElementById('cap'), scrim = document.getElementById('mirrorScrim');
+  var text = 'Pas besoin de trouver les mots.';
+  var spans = [];
+  text.split(' ').forEach(function (word, wi) {
+    var w = document.createElement('span'); w.className = 'w';
+    word.split('').forEach(function (ch) {
+      var s = document.createElement('span'); s.textContent = ch; w.appendChild(s); spans.push(s);
+    });
+    line.appendChild(w);
+    if (wi < text.split(' ').length - 1) line.appendChild(document.createTextNode(' '));
+  });
+  function clamp(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
+  function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+  var last = -1;
+  function render(p) {
+    var fogIn = easeOut(clamp(p / 0.18));
+    var wipe = easeOut(clamp((p - 0.50) / 0.25));
+    var write = easeOut(clamp((p - 0.18) / 0.32));
+    var settle = easeOut(clamp((p - 0.75) / 0.15));
+
+    blur.style.opacity = fogIn.toFixed(3);
+    if (!reduced) {
+      blur.style.transform = 'scale(' + (1 + 0.06 * clamp(p / 0.5)).toFixed(4) + ')';
+      fog.style.setProperty('--drift', (p * 100).toFixed(1) + 'px');
+    }
+    fog.style.opacity = (0.94 * fogIn * (1 - wipe)).toFixed(3);
+    fog.style.clipPath = wipe > 0
+      ? 'polygon(0 0,' + (100 - wipe * 135) + '% 0,' + (100 - wipe * 135 - 28) + '% 100%,0 100%)'
+      : 'none';
+    /* the blade photo is already under the fog when the towel wipes it away */
+    blade.style.opacity = clamp((p - 0.36) / 0.14).toFixed(3);
+    if (!reduced) {
+      var kb = 1.10 - 0.10 * clamp((p - 0.5) / 0.5);
+      blade.style.transform = 'scale(' + kb.toFixed(4) + ')';
+    }
+    var n = spans.length;
+    for (var i = 0; i < n; i++) {
+      var local = clamp((write * (n + 2) - i) / 2.4);
+      spans[i].style.opacity = (local * (1 - wipe)).toFixed(3);
+      if (!reduced) {
+        spans[i].style.filter = 'blur(' + ((1 - local) * 4).toFixed(2) + 'px)';
+        spans[i].style.transform = 'translateY(' + ((1 - local) * 0.14).toFixed(3) + 'em)';
+      }
+    }
+    scrim.style.opacity = settle.toFixed(3);
+    after.style.opacity = settle.toFixed(3);
+    if (!reduced) after.style.transform = 'translateY(' + ((1 - settle) * 10).toFixed(1) + 'px)';
+    cap.style.opacity = (wipe * 0.9).toFixed(3);
+  }
+  function tick() {
+    var p = parseFloat(getComputedStyle(act).getPropertyValue('--sc-p')) || 0;
+    if (p !== last) { last = p; render(p); }
+    requestAnimationFrame(tick);
+  }
+  render(0);
+  requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>

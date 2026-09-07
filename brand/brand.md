@@ -1,6 +1,6 @@
 # Sainte-Anne Barber — Référence de marque
 
-> Version 0.1, direction proposée (non validée). Construite sur le langage réel des
+> Version 0.2, direction proposée. Pivot validé par Robin : ambiance noire premium, fidèle au salon (brique, cuir noir, enseigne rétroéclairée ambre). Construite sur le langage réel des
 > avis clients et sur le lieu : 10 rue Ranchin, à l'ombre du Carré Sainte-Anne.
 
 ## Recherche marché (résumé)
@@ -35,8 +35,11 @@ finissent à la lame.
 **Effet recherché (3 secondes)** : feutré, net, sûr.
 **Personnalité** : calme mais jamais mou · précis mais jamais froid · rare mais
 jamais snob.
-**Décision signature** : un site clair, pierre, dans un secteur entièrement noir.
-Et une seule couleur, un vert de vitrail, là où tout le monde met de l'or.
+**Décision signature** : le noir du salon, mais traité comme une lumière et non
+comme un décor. Une seule couleur, l'ambre de l'enseigne rétroéclairée, réservée
+à ce qui éclaire (folio, filet du lien, numéros de chapitre), jamais en aplat ni
+en bouton doré. Et la sortie du site en plein jour : le colophon sur pierre claire,
+comme la porte qu'on pousse en partant.
 **Ce qu'on refuse** : le noir + or, la vidéo hero plein écran, les pictos de rasoir,
 les points d'exclamation, le tutoiement, les compteurs de chiffres inventés.
 **Risque** : glisser vers le spa. Garde-fou : angles vifs, serif à déliés fins,
@@ -51,16 +54,17 @@ pour tenir « rituel premium »).
 
 | Nom | Hex | Rôle | Usage | Interdit |
 |---|---|---|---|---|
-| Pierre | `#E6E0D4` | canvas | fond de page, 60 % de la surface | jamais en texte |
-| Chaux | `#F3EFE7` | surface | plaques, cartels, zones de lecture | jamais de bordure blanche pure |
-| Encre | `#141A18` | ink | titres, corps, colophon (fond inversé) | jamais #000 |
-| Encre douce | `#4F5A56` | ink-soft | légendes, folios, texte secondaire | pas en corps long |
-| Trait | `#C9C4B8` | border | filets 1 px, séparateurs | jamais > 1 px |
-| Vitrail | `#1F4B3F` | signature | folio actif, soulignement du lien Réserver, cartel sélectionné, < 10 % de la surface | jamais en aplat pleine largeur |
-| Vitrail profond | `#173A31` | signature texte | liens sur Chaux | — |
+| Encre | `#0C0B0A` | canvas | fond de page, le noir chaud du salon | jamais #000 |
+| Cuir | `#171412` | surface | plaques (la carte), zones de lecture | pas de bordure claire |
+| Chaux | `#EFE8DC` | ink | titres, corps | jamais #FFF |
+| Chaux douce | `#A69D90` | ink-soft | légendes, folios, secondaire (7,5:1 sur Encre) | pas en corps long |
+| Ambre | `#E3B266` | signature | numéros de chapitre, filet du lien Réserver, folio actif ; < 5 % de la surface | jamais en aplat, jamais en bouton |
+| Pierre | `#E6E0D4` | canvas du colophon | la plaque finale, en plein jour | nulle part ailleurs |
+| Encre du jour | `#141210` | ink sur Pierre | texte du colophon | — |
 
-Contraste mesuré : Encre sur Pierre ≈ 13:1 · Vitrail sur Pierre ≈ 7,5:1 · Pierre sur
-Encre ≈ 13:1. Tous les neutres sont teintés vert (3 à 6 %) : aucun gris pur.
+Contraste mesuré : Chaux sur Encre ≈ 16:1 · Chaux douce sur Encre ≈ 7,5:1 · Ambre sur
+Encre ≈ 10:1 · Encre du jour sur Pierre ≈ 13:1. Tous les neutres sont teintés chaud
+(3 à 6 %) : aucun gris pur. Ombres teintées vers l'encre chaude.
 
 ## Typographie
 
@@ -81,7 +85,11 @@ Geist capitales espacées, à 40 % de la largeur. Le trait d'union est allongé 
 aminci : c'est la lame, le seul geste graphique. Monogramme optionnel : un « A »
 dont la traverse est remplacée par une ogive (l'arc de Sainte-Anne). Zone de
 protection : hauteur du « A ». Taille minimale : 96 px de large. Une version Encre,
-une version Pierre. Interdits : contour, ombre, dégradé, ciseaux.
+une version Pierre. Interdits : contour, ombre, dégradé.
+Le logo existant (flèche de l'église, ciseaux et peigne croisés, lettrage peint,
+« Coupe · Barbe · Soins ») reste tel quel : c'est le capital de marque déjà reconnu
+dans le salon (enseigne, serviettes, capes). Le site le met en scène, il ne le
+redessine pas. Fichier vectoriel à demander au salon.
 
 ## Imagerie
 
@@ -120,25 +128,21 @@ centré partout · « scroll » ou flèche d'incitation.
 
 ```css
 :root {
-  --color-canvas: #E6E0D4;        /* Pierre */
-  --color-surface: #F3EFE7;       /* Chaux */
-  --color-ink: #141A18;           /* Encre */
-  --color-ink-soft: #4F5A56;      /* Encre douce */
-  --color-border: #C9C4B8;        /* Trait */
-  --color-signature: #1F4B3F;     /* Vitrail */
-  --color-signature-deep: #173A31;
+  --color-canvas: #0C0B0A;        /* Encre */
+  --color-surface: #171412;       /* Cuir */
+  --color-ink: #EFE8DC;           /* Chaux */
+  --color-ink-soft: #A69D90;      /* Chaux douce */
+  --color-signature: #E3B266;     /* Ambre */
+  --color-day-canvas: #E6E0D4;    /* Pierre, colophon */
+  --color-day-ink: #141210;
   --font-display: "Bodoni Moda", "Didot", Georgia, serif;
   --font-text: "Geist", system-ui, -apple-system, sans-serif;
-  --track-display: -0.02em;
-  --leading-display: 1.02;
-  --leading-text: 1.6;
-  --measure: 62ch;
 }
 /* Mapping scrollcraft */
 :root {
   --sc-canvas: var(--color-canvas);  --sc-surface: var(--color-surface);
   --sc-ink: var(--color-ink);        --sc-ink-soft: var(--color-ink-soft);
-  --sc-accent: var(--color-signature); --sc-accent-ink: var(--color-surface);
+  --sc-accent: var(--color-signature); --sc-accent-ink: var(--color-canvas);
   --sc-font-display: var(--font-display); --sc-font-text: var(--font-text);
 }
 ```

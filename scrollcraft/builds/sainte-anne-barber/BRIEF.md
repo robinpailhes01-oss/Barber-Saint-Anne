@@ -50,12 +50,16 @@
    dedans, doucement.
 5. **La chose que ce site fait qu'aucun autre ne fait.** Le scroll embue le miroir,
    écrit dans la buée, puis l'essuie d'un geste de serviette.
-6. **Distance au premium-minimal.** Éditorial (papier, folios, mesure, retenue).
-   Pas premium-minimal noir + un accent : c'est le code de tous les barbiers.
+6. **Distance au premium-minimal.** Réponse de Robin (7 sept.) : « il faut quand
+   même une ambiance black premium comme leur salon ». Donc : éditorial (folios,
+   mesure, retenue) sur le noir chaud du salon, un seul accent ambre (l'enseigne),
+   et la sortie en plein jour au colophon.
 7. **Un monde continu ou des scènes distinctes ?** Des chapitres, coupes franches.
    Le salon n'est pas un voyage, c'est un lieu où l'on s'assoit.
-8. **Assets existants.** 22 photos sur Planity, un compte Instagram, aucun footage
-   connu. À demander à Tony / Loïc : 30 s de vidéo verticale d'un dégradé et
+8. **Assets existants.** 18 photos publiques récupérées sur la fiche Planity du
+   salon (logo, enseigne, rue Ranchin, serviette chaude, ciseaux, outils, barbiers)
+   et intégrées en webp desktop + mobile dans `assets/`. Aucun footage : le clip
+   du pic est remplacé par une photo (ciseaux) avec un lent push-in au scroll. À demander à Tony / Loïc : 30 s de vidéo verticale d'un dégradé et
    d'une finition à la lame, 3 à 5 photos brutes du salon et de la rue, le logo
    s'il existe. Sinon : génération (1 clip macro + 4 stills, même préambule).
 

@@ -4,24 +4,17 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Geist:wght@400;500&display=swap">
 <style>
 :root{
-  --canvas:#E6E0D4; --surface:#F3EFE7; --ink:#141A18; --ink-soft:#4F5A56; --border:#C9C4B8;
-  --sig:#1F4B3F; --sig-deep:#173A31; --sig-soft:rgba(31,75,63,.10);
-  --inv-canvas:#141A18; --inv-ink:#E6E0D4; --inv-soft:#A9B0AB; --inv-border:#2E3835; --inv-sig:#8FC2AD;
+  --canvas:#0C0B0A; --surface:#171412; --ink:#EFE8DC; --ink-soft:#A69D90; --border:#2A2521;
+  --sig:#E3B266; --sig-deep:#E3B266; --sig-soft:rgba(227,178,102,.12);
+  --inv-canvas:#E6E0D4; --inv-ink:#141210; --inv-soft:#4F4A42; --inv-border:#C9C4B8; --inv-sig:#141210;
   --display:"Bodoni Moda","Didot","Bodoni 72",Georgia,serif;
   --text:"Geist",system-ui,-apple-system,"Segoe UI",sans-serif;
   --measure:62ch; --gutter:clamp(1.25rem,4vw,3.5rem);
 }
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --canvas:#121716; --surface:#1B2220; --ink:#E6E0D4; --ink-soft:#A9B0AB; --border:#2E3835;
-    --sig:#8FC2AD; --sig-deep:#A8D3C1; --sig-soft:rgba(143,194,173,.12);
-    --inv-canvas:#E6E0D4; --inv-ink:#141A18; --inv-soft:#4F5A56; --inv-border:#C9C4B8; --inv-sig:#1F4B3F;
-  }
-}
-:root[data-theme="dark"]{
-  --canvas:#121716; --surface:#1B2220; --ink:#E6E0D4; --ink-soft:#A9B0AB; --border:#2E3835;
-  --sig:#8FC2AD; --sig-deep:#A8D3C1; --sig-soft:rgba(143,194,173,.12);
-  --inv-canvas:#E6E0D4; --inv-ink:#141A18; --inv-soft:#4F5A56; --inv-border:#C9C4B8; --inv-sig:#1F4B3F;
+:root[data-theme="light"]{
+  --canvas:#E6E0D4; --surface:#F3EFE7; --ink:#141210; --ink-soft:#4F4A42; --border:#C9C4B8;
+  --sig:#8A5F1E; --sig-deep:#6E4A14; --sig-soft:rgba(138,95,30,.12);
+  --inv-canvas:#0C0B0A; --inv-ink:#EFE8DC; --inv-soft:#A69D90; --inv-border:#2A2521; --inv-sig:#E3B266;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -218,7 +211,7 @@ tr.is-us td{color:var(--sig-deep);font-weight:500}
 
 <div class="page">
 <aside class="folio" aria-label="Sommaire">
-  <div class="mark">Sainte<span class="hyphen"></span>Anne<small>Barber · direction v0.1</small></div>
+  <div class="mark">Sainte<span class="hyphen"></span>Anne<small>Barber · direction v0.2</small></div>
   <ol>
     <li><a href="#depart"><span>I</span><span>Le point de départ</span></a></li>
     <li><a href="#marche"><span>II</span><span>Le marché</span></a></li>
@@ -240,7 +233,7 @@ tr.is-us td{color:var(--sig-deep);font-weight:500}
   <p class="lede">La direction de marque, de voix et de scroll proposée pour le site. Un document de travail : tout ce qui suit est un parti pris à valider, pas une conclusion.</p>
   <div class="title-meta">
     <span>10 rue Ranchin, à l'ombre du Carré Sainte-Anne</span>
-    <span>Pré-brief rédigé sans interview, 7 septembre 2026</span>
+    <span>v0.2, 7 septembre 2026 : ambiance noire du salon, validée par Robin</span>
   </div>
 </header>
 
@@ -317,7 +310,7 @@ tr.is-us td{color:var(--sig-deep);font-weight:500}
       <p><b>Tension.</b> Le calme d'une chapelle et la précision d'une lame.</p>
       <p><b>Effet en trois secondes.</b> Feutré, net, sûr.</p>
       <p><b>Référence située.</b> La nef du Carré Sainte-Anne avec une œuvre contemporaine dedans. La pierre de l'Écusson à 18h.</p>
-      <div class="kv"><span><b>Personnalité :</b> calme mais jamais mou · précis mais jamais froid · rare mais jamais snob.</span><span><b>Registre :</b> pierre claire, encre, un vert de vitrail. Serif à déliés fins, grotesque muette. Photo documentaire, mains et outils.</span><span><b>Refuse :</b> le noir et or, la vidéo hero, le tutoiement.</span><span><b>Risque :</b> glisser vers le spa. Garde-fou : angles vifs, lame, pas de vapeur décorative.</span></div>
+      <div class="kv"><span><b>Personnalité :</b> calme mais jamais mou · précis mais jamais froid · rare mais jamais snob.</span><span><b>Registre :</b> le noir chaud du salon, brique et cuir, un seul ambre traité comme une lumière. Serif à déliés fins, grotesque muette. Les vraies photos du salon, mains et outils.</span><span><b>Refuse :</b> l'or en aplat, la vidéo hero plein écran, le tutoiement.</span><span><b>Risque :</b> ressembler aux vingt autres barbiers noirs. Garde-fou : la page de titre sans vidéo, les cartels, la sortie en plein jour.</span></div>
     </article>
     <article class="terr">
       <h3><small>Écarté, on garde sa ligne</small>Le Trait</h3>
@@ -352,17 +345,17 @@ tr.is-us td{color:var(--sig-deep);font-weight:500}
 <section class="chapter" id="identite">
   <div class="chapter-head">
     <span class="label">IV · L'identité</span>
-    <h2>Pierre, encre, et un seul vert.</h2>
-    <p>Un site clair dans un secteur entièrement noir : c'est la décision signature. La couleur n'apparaît que là où l'on doit poser la main. Tous les neutres sont teintés du même vert, il n'y a aucun gris pur.</p>
+    <h2>Le noir du salon, traité comme une lumière.</h2>
+    <p>Le salon est noir, brique et cuir, éclairé par une enseigne rétroéclairée ambre et des lampes à filament. Le site prend ce noir chaud, mais l'ambre n'y est qu'une lumière : numéros de chapitre, filet sous le lien, jamais un aplat doré. Et la page se termine en plein jour, sur pierre claire, comme la porte qu'on pousse en sortant. Aucun gris pur : tous les neutres sont teintés chaud.</p>
   </div>
   <div class="stack" style="gap:3rem">
     <div class="swatches">
-      <div class="sw"><div class="chip" style="background:#E6E0D4"></div><b>Pierre</b><code>#E6E0D4</code><small>Canvas. 60 % de la surface. Jamais en texte.</small></div>
-      <div class="sw"><div class="chip" style="background:#F3EFE7"></div><b>Chaux</b><code>#F3EFE7</code><small>Plaques, cartels, zones de lecture.</small></div>
-      <div class="sw"><div class="chip" style="background:#141A18"></div><b>Encre</b><code>#141A18</code><small>Titres, corps, colophon inversé. Jamais #000.</small></div>
-      <div class="sw"><div class="chip" style="background:#4F5A56"></div><b>Encre douce</b><code>#4F5A56</code><small>Légendes, folios, secondaire.</small></div>
-      <div class="sw"><div class="chip" style="background:#C9C4B8"></div><b>Trait</b><code>#C9C4B8</code><small>Filets 1 px, jamais plus épais.</small></div>
-      <div class="sw"><div class="chip" style="background:#1F4B3F"></div><b>Vitrail</b><code>#1F4B3F</code><small>Signature. Folio actif, lien Réserver, cartel choisi. Moins de 10 % de la surface. Contraste 7,5:1 sur Pierre.</small></div>
+      <div class="sw"><div class="chip" style="background:#0C0B0A"></div><b>Encre</b><code>#0C0B0A</code><small>Canvas. Le noir chaud du salon. Jamais #000.</small></div>
+      <div class="sw"><div class="chip" style="background:#171412"></div><b>Cuir</b><code>#171412</code><small>Plaques, la carte, zones de lecture.</small></div>
+      <div class="sw"><div class="chip" style="background:#EFE8DC"></div><b>Chaux</b><code>#EFE8DC</code><small>Titres et corps. Jamais #FFF.</small></div>
+      <div class="sw"><div class="chip" style="background:#A69D90"></div><b>Chaux douce</b><code>#A69D90</code><small>Légendes, folios. Contraste 7,5:1 sur Encre.</small></div>
+      <div class="sw"><div class="chip" style="background:#E3B266"></div><b>Ambre</b><code>#E3B266</code><small>Signature : la lumière de l'enseigne. Numéros, filets, folio actif. Moins de 5 % de la surface, jamais en aplat ni en bouton.</small></div>
+      <div class="sw"><div class="chip" style="background:#E6E0D4"></div><b>Pierre</b><code>#E6E0D4</code><small>Le colophon seulement : la sortie en plein jour.</small></div>
     </div>
     <div class="specimen">
       <div class="big">Pas besoin de<br>trouver <i>les mots.</i></div>
@@ -496,7 +489,7 @@ tr.is-us td{color:var(--sig-deep);font-weight:500}
         <div class="rung"><span class="num">IV</span><div class="span"><i style="width:15%"></i><span>1,6 vh</span></div><div class="what"><b>Les mains</b><p>Tony et Loïc, portraits documentaires, et trois avis dans les mots des clients. Le seul endroit où la page dit « vous ».</p></div><div class="dev"><span><code>flow</code> + <code>in</code></span><span>une <code>reveal</code> sur le portrait</span></div></div>
         <div class="rung"><span class="num">·</span><div class="span"><i style="width:9%"></i><span>1,0 vh</span></div><div class="what"><b>Colophon</b><p>Coupe franche vers l'encre. Adresse, horaires, téléphone, Réserver un créneau : en texte courant, et ça reste allumé.</p></div><div class="dev"><span>cue qui tient</span><span>plaque inversée</span></div></div>
       </div>
-      <p class="muted" style="font-size:.9rem">Six familles d'appareils, jamais deux fois de suite la même, un seul clip vidéo, un seul pic. Pourquoi pas les sept autres grammaires : le one-shot filmique est le défaut de tous les sites barbier ; le monde continu est le montage le plus fragile pour un lieu où l'on s'assoit ; le poster typographique tue les visages ; le split stage avant / après est fort pour un acte, intenable sur onze écrans ; la surface vivante, le catalogue et le cutlist ne correspondent ni au métier ni au ressenti demandé.</p>
+      <p class="muted" style="font-size:.9rem">Six familles d'appareils, jamais deux fois de suite la même, un seul clip vidéo (une photo avec push-in tant que le salon n'a pas filmé), un seul pic. Pourquoi pas les sept autres grammaires : le one-shot filmique est le défaut de tous les sites barbier ; le monde continu est le montage le plus fragile pour un lieu où l'on s'assoit ; le poster typographique tue les visages ; le split stage avant / après est fort pour un acte, intenable sur onze écrans ; la surface vivante, le catalogue et le cutlist ne correspondent ni au métier ni au ressenti demandé.</p>
     </div>
 
     <div class="demo">
@@ -558,8 +551,8 @@ tr.is-us td{color:var(--sig-deep);font-weight:500}
     <li><div><b>La vibe.</b><p>Feutré, net, pierre, sans un mot de trop. Vous gardez ? Une référence à vous, hors sites web : un film, un disque, un lieu, un objet ?</p></div></li>
     <li><div><b>L'ordre des chapitres.</b><p>Titre, le lieu, le geste, la carte, les mains, colophon. Une section manque ? Produits, cartes cadeaux, recrutement ?</p></div></li>
     <li><div><b>Le pic.</b><p>Le miroir embué. Ça vous parle, ou vous voyez un autre moment que le visiteur doit retenir ?</p></div></li>
-    <li><div><b>La couleur du site.</b><p>Pierre claire et un vert de vitrail, contre le noir et or de tout le secteur. Ou vous tenez au noir ?</p></div></li>
-    <li><div><b>Les assets.</b><p>Tony ou Loïc peuvent-ils filmer trente secondes en vertical d'une finition à la lame ? Des photos brutes du salon et de la rue ? Un logo existe-t-il déjà ?</p></div></li>
+    <li><div><b>La couleur du site.</b><p>Tranché par Robin : le noir du salon. Reste à valider la sortie en plein jour du colophon (plaque pierre claire à la fin).</p></div></li>
+    <li><div><b>Les assets.</b><p>Dix-huit photos publiques du salon (Planity) sont déjà intégrées, logo compris. Il manque trente secondes de vidéo verticale d'une finition à la lame pour le pic, et le logo en vectoriel.</p></div></li>
     <li><div><b>L'action.</b><p>Réserver un créneau via Planity directement, ou le téléphone en premier ? Un seul libellé, partout.</p></div></li>
     <li><div><b>Les avis.</b><p>Ils sont publics, mais on demande avant de les citer. Et « Ludovic », c'est Loïc ?</p></div></li>
     <li><div><b>Les faits.</b><p>Nombre de fauteuils, date d'ouverture, prix à jour, boisson healthy toujours proposée ?</p></div></li>
@@ -572,7 +565,7 @@ tr.is-us td{color:var(--sig-deep);font-weight:500}
     <p class="run">Une fois ces huit réponses posées : le brand book applique la marque, la maquette Figma pose les six chapitres en desktop et mobile, puis la page se construit sur le moteur scrollcraft avec les assets réels du salon.</p>
     <ul class="next">
       <li>Interview de 20 minutes avec Robin, puis avec le salon</li>
-      <li>Figma : planches identité, chapitres desktop et mobile, états du miroir embué (nécessite un siège Édition)</li>
+      <li>Le site v1 est en ligne sur Vercel, construit sur ces choix. Figma ensuite pour les déclinaisons (nécessite un siège Édition)</li>
       <li>Assets : collecte des photos et vidéos réelles, génération uniquement pour combler</li>
       <li>Build : page HTML sur le moteur scrollcraft, vérification par captures à chaque position, test sur iPhone</li>
     </ul>
