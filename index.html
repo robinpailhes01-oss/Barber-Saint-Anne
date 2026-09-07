@@ -65,21 +65,26 @@ a { color: inherit; }
 .nb { white-space: nowrap; }
 
 /* ---------- buttons ---------- */
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: .7rem; min-height: 3.1rem; padding: 0 1.5rem; border-radius: var(--r-pill); border: 1px solid transparent; font-family: var(--sans); font-size: .9rem; font-weight: 500; letter-spacing: 0; text-decoration: none; white-space: nowrap; cursor: pointer; transition: background-color .35s var(--ease), color .35s var(--ease), border-color .35s var(--ease), transform .35s var(--ease); }
+.btn { display: inline-flex; align-items: center; gap: .9rem; min-height: 3.25rem; padding: .3rem .3rem .3rem 1.4rem; border-radius: var(--r-pill); border: 1px solid transparent; font-family: var(--sans); font-size: .95rem; font-weight: 500; letter-spacing: 0; text-decoration: none; white-space: nowrap; cursor: pointer; transition: background-color .4s var(--ease), color .4s var(--ease), border-color .4s var(--ease), transform .4s var(--ease), box-shadow .4s var(--ease); }
 .btn:active { transform: translateY(1px); }
-.dark .btn--solid, .btn--solid { background: var(--creme); color: var(--noir); border-color: var(--creme); }
-.dark .btn--solid:hover { background: #fff; border-color: #fff; }
-.light .btn--solid { background: var(--noir); color: var(--creme); border-color: var(--noir); }
-.light .btn--solid:hover { background: #000; }
-.btn--ghost { background: rgba(255,255,255,.06); color: currentColor; border-color: var(--line-strong); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+.btn__i { width: 2.5rem; height: 2.5rem; border-radius: 50%; display: grid; place-items: center; flex: none; transition: transform .5s var(--ease), background-color .4s var(--ease); }
+.btn__i svg { width: .85rem; height: .85rem; display: block; transition: transform .5s var(--ease); }
+.btn:hover .btn__i svg { transform: translate(2px, -2px); }
+.btn--plain { padding: 0 1.3rem; }
+.btn--solid { background: var(--creme); color: var(--noir); border-color: var(--creme); box-shadow: 0 10px 30px -12px rgba(0,0,0,.6); }
+.btn--solid .btn__i { background: var(--noir); color: var(--creme); }
+.btn--solid:hover { background: #FFFDF8; }
+.light .btn--solid { background: var(--noir); color: var(--creme); border-color: var(--noir); box-shadow: 0 12px 30px -14px rgba(14,14,14,.55); }
+.light .btn--solid .btn__i { background: var(--creme); color: var(--noir); }
+.btn--ghost { background: rgba(244,241,232,.06); color: currentColor; border-color: rgba(244,241,232,.22); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+.btn--ghost .btn__i { background: rgba(244,241,232,.12); color: currentColor; }
+.btn--ghost:hover { border-color: rgba(244,241,232,.5); }
+.light .btn--ghost { background: rgba(14,14,14,.04); border-color: rgba(14,14,14,.22); }
+.light .btn--ghost .btn__i { background: rgba(14,14,14,.08); }
+.light .btn--ghost:hover { border-color: rgba(14,14,14,.6); }
 .btn--amber { background: var(--amber); color: var(--amber-ink); border-color: var(--amber); }
+.btn--amber .btn__i { background: var(--amber-ink); color: var(--amber); }
 .btn--amber:hover { background: #E4B061; }
-.btn .arr { display: inline-block; transition: transform .4s var(--ease); }
-.btn:hover .arr { transform: translate(2px,-2px); }
-.btn--ghost:hover { border-color: currentColor; }
-.link { display: inline-flex; align-items: center; gap: .55rem; font-size: .8rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; text-decoration: none; position: relative; padding-bottom: .35rem; }
-.link::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: currentColor; transform-origin: left; transform: scaleX(1); transition: transform .5s var(--ease); }
-.link:hover::after { transform: scaleX(0); transform-origin: right; }
 .skip { position: absolute; left: -999px; top: 0; }
 .skip:focus { left: 1rem; top: 1rem; z-index: 999; background: var(--creme); color: var(--noir); padding: .5rem .8rem; }
 
@@ -130,7 +135,7 @@ body.ready .hdr { transform: none; }
 .stage__title .w { display: inline-block; }
 .stage__title .l1, .stage__title .l2 { display: block; }
 .stage__card { position: relative; z-index: 2; border-radius: var(--r-img); overflow: clip; background: #151515; box-shadow: 0 30px 80px -20px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.06); }
-.stage__card video, .stage__card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+.stage__card video, .stage__card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 55% 40%; }
 .stage__card video { opacity: 0; transition: opacity .8s var(--ease); }
 .stage.has-video .stage__card video { opacity: 1; }
 .stage__tap { position: absolute; inset: 0; display: none; place-items: center; background: transparent; border: 0; cursor: pointer; z-index: 3; }
@@ -191,11 +196,14 @@ body.ready .hdr { transform: none; }
 @media (min-width: 900px) { .head--split { grid-template-columns: 1fr auto; gap: 3rem; } }
 .grid-2 { display: grid; gap: clamp(2rem, 5vw, 4.5rem); grid-template-columns: 1fr; align-items: start; }
 @media (min-width: 900px) { .grid-2 { grid-template-columns: 1fr 1fr; } .grid-2--wide { grid-template-columns: 1.15fr 1fr; } }
-figure { margin: 0; }
-figcaption { margin-top: .8rem; display: flex; justify-content: space-between; gap: 1rem; font-size: .85rem; color: var(--ink-soft); }
-.ph { overflow: clip; border-radius: var(--r-img); background: var(--charbon); }
-.light .ph { background: var(--creme-2); }
-.ph img { width: 100%; object-fit: cover; }
+figure { margin: 0; position: relative; }
+figcaption { position: absolute; left: 1.1rem; right: 1.1rem; bottom: 1rem; z-index: 2; display: flex; justify-content: space-between; align-items: end; gap: 1rem; font-size: .82rem; color: rgba(244,241,232,.92); pointer-events: none; }
+figcaption b { font-stretch: 68%; font-weight: 700; font-size: 1.35rem; line-height: 1; display: block; margin-bottom: .2rem; }
+figcaption span:last-child { color: rgba(244,241,232,.7); }
+.ph { overflow: clip; border-radius: var(--r-img); background: var(--charbon); position: relative; }
+.ph::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(to top, rgba(10,10,10,.62), rgba(10,10,10,0) 42%); pointer-events: none; z-index: 1; }
+.ph::before { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px rgba(244,241,232,.08); z-index: 2; pointer-events: none; }
+.ph img { width: 100%; object-fit: cover; filter: saturate(.9) contrast(1.04); }
 .r45 img { aspect-ratio: 4 / 5; } .r34 img { aspect-ratio: 3 / 4; } .r43 img { aspect-ratio: 4 / 3; } .r32 img { aspect-ratio: 3 / 2; } .r1 img { aspect-ratio: 1; }
 
 /* reveal system */
@@ -213,7 +221,7 @@ figcaption { margin-top: .8rem; display: flex; justify-content: space-between; g
   .rv.f, .rv.clipw .clip, .split .w > span, .rv.clipw .clip img { opacity: 1 !important; transform: none !important; clip-path: none !important; transition: none !important; }
   .hero__media img { transform: none !important; transition: none !important; }
   .intro { transition: none; }
-  .marquee__track { animation: none !important; }
+  
 }
 
 /* le salon */
@@ -253,14 +261,31 @@ figcaption { margin-top: .8rem; display: flex; justify-content: space-between; g
 .menu__foot { margin-top: clamp(2.5rem, 5vw, 4rem); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1.2rem 2rem; padding-top: 1.5rem; border-top: 1px solid var(--line); }
 .menu__foot p { margin: 0; font-size: .9rem; color: var(--ink-soft); max-width: 48ch; }
 
-/* marquee gallery */
-.marquee { overflow: clip; padding-block: clamp(3rem, 6vw, 5rem); }
-.marquee__track { display: flex; gap: 1rem; width: max-content; animation: mq 48s linear infinite; }
-.marquee:hover .marquee__track { animation-play-state: paused; }
-.marquee__track figure { width: clamp(14rem, 26vw, 24rem); flex: none; }
-.marquee__track img { aspect-ratio: 4 / 5; object-fit: cover; width: 100%; border-radius: var(--r-img); }
-.marquee__track figure:nth-child(even) img { aspect-ratio: 3 / 2; }
-@keyframes mq { to { transform: translateX(-50%); } }
+/* galerie : défilement horizontal, simple */
+.gal { padding-block: clamp(4rem, 8vw, 7rem); }
+.gal__head { display: flex; justify-content: space-between; align-items: end; gap: 2rem; margin-bottom: 2rem; }
+.gal__nav { display: none; gap: .6rem; }
+@media (min-width: 900px) { .gal__nav { display: flex; } }
+.gal__nav button { width: 3rem; height: 3rem; border-radius: 50%; border: 1px solid rgba(244,241,232,.22); background: transparent; color: var(--creme); display: grid; place-items: center; cursor: pointer; transition: border-color .3s, background-color .3s; }
+.gal__nav button:hover { border-color: var(--creme); background: rgba(244,241,232,.06); }
+.gal__nav svg { width: .9rem; height: .9rem; }
+.gal__track { display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-inline: var(--gutter); margin-inline: calc(var(--gutter) * -1); -webkit-overflow-scrolling: touch; }
+.gal__track::-webkit-scrollbar { display: none; }
+.gal__track figure { flex: none; width: min(78vw, 26rem); scroll-snap-align: start; }
+.gal__track img { aspect-ratio: 4 / 5; }
+.gal__track figure.wide { width: min(88vw, 38rem); }
+.gal__track figure.wide img { aspect-ratio: 3 / 2; }
+@media (min-width: 900px) { .gal__track figure { width: 26rem; } .gal__track figure.wide { width: 39rem; } }
+
+/* le rituel */
+.rituel { display: grid; gap: clamp(2rem, 5vw, 5rem); grid-template-columns: 1fr; align-items: center; }
+@media (min-width: 900px) { .rituel { grid-template-columns: 1fr 1.1fr; } }
+.rituel__list { display: grid; margin-top: 2.5rem; border-top: 1px solid var(--line); }
+.rituel__list > div { display: grid; grid-template-columns: 3rem 1fr auto; gap: 1rem; align-items: baseline; padding: 1.4rem 0; border-bottom: 1px solid var(--line); }
+.rituel__list i { font-style: normal; font-stretch: 68%; font-weight: 700; font-size: 1.1rem; color: var(--amber); }
+.rituel__list b { display: block; font-stretch: 68%; font-weight: 700; font-size: 1.6rem; line-height: 1.05; }
+.rituel__list p { margin: .3rem 0 0; color: var(--ink-soft); font-size: .95rem; max-width: 40ch; }
+.rituel__list small { color: var(--ink-soft); font-size: .85rem; white-space: nowrap; }
 
 /* avis */
 .quotes { display: grid; gap: clamp(2rem, 5vw, 3rem); grid-template-columns: 1fr; }
@@ -310,7 +335,7 @@ figcaption { margin-top: .8rem; display: flex; justify-content: space-between; g
     </nav>
     <div class="hdr__right">
       <a class="ig" href="https://www.instagram.com/sainte_anne_barber/" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
-      <a class="btn btn--solid" href="https://www.planity.com/sainte-anne-barber-34000-montpellier" rel="noopener">Réserver</a>
+      <a class="btn btn--solid btn--plain" href="https://www.planity.com/sainte-anne-barber-34000-montpellier" rel="noopener">Réserver</a>
     </div>
   </div>
 </header>
@@ -326,14 +351,14 @@ figcaption { margin-top: .8rem; display: flex; justify-content: space-between; g
       <div class="stage__main">
         <h1 class="stage__title disp rv f" style="--d:250ms"><span class="l1">Sainte-Anne</span><span class="l2">Barber</span></h1>
         <div class="stage__card rv f" id="card" style="--d:450ms">
-          <img src="assets/barbier.webp" srcset="assets/barbier-m.webp 800w, assets/barbier.webp 1600w" sizes="(min-width: 900px) 22vw, 100vw" width="1600" height="900" alt="Un barbier concentré sur sa coupe, devant le mur de brique du salon." fetchpriority="high">
+          <img src="assets/serviette.webp" srcset="assets/serviette-m.webp 800w, assets/serviette.webp 1600w" sizes="(min-width: 900px) 22vw, 100vw" width="1600" height="900" alt="Serviette chaude brodée Sainte-Anne Barber posée sur le visage d'un client." fetchpriority="high">
           <video id="reelVideo" muted loop playsinline autoplay preload="auto" aria-label="Vidéo du salon Sainte-Anne Barber"><source src="assets/reel.mp4" type="video/mp4"></video>
           <button class="stage__tap" id="reelTap" type="button" aria-label="Lire la vidéo"><span></span></button>
         </div>
         <div class="stage__foot rv f" style="--d:800ms">
           <div class="glass">
             <b>5,0 <span class="star" aria-hidden="true">★</span></b>
-            <p>Plus de 50 avis Google. Coiffeur et barbier rue Ranchin, dans l'Écusson, depuis 2025.</p>
+            <p>Plus de 50 avis Google. Un moment pour soi, rue Ranchin, dans l'Écusson.</p>
           </div>
           <div class="badge" aria-hidden="true"><svg viewBox="0 0 100 100"><defs><path id="circ" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0"/></defs><text><textPath href="#circ">Montpellier · Écusson · Rue Ranchin · </textPath></text></svg></div>
         </div>
@@ -345,11 +370,11 @@ figcaption { margin-top: .8rem; display: flex; justify-content: space-between; g
           <li><span>Coupe et barbe</span><b>35 €</b></li>
           <li><span>Coupe étudiant</span><b>20 €</b></li>
           <li><span>Soin visage</span><b>dès 30 €</b></li>
-          <li><span>Réserver un créneau</span><a class="btn btn--amber" href="https://www.planity.com/sainte-anne-barber-34000-montpellier" rel="noopener">Réserver <span class="arr" aria-hidden="true">→</span></a></li>
+          <li><span>Réserver un créneau</span><a class="btn btn--amber" href="https://www.planity.com/sainte-anne-barber-34000-montpellier" rel="noopener">Réserver <span class="btn__i"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></a></li>
         </ul>
         <div class="stage__ctas">
-          <a class="btn btn--solid" href="https://www.planity.com/sainte-anne-barber-34000-montpellier" rel="noopener">Réserver <span class="arr" aria-hidden="true">↗</span></a>
-          <a class="btn btn--ghost" href="#carte">La carte <span class="arr" aria-hidden="true">↘</span></a>
+          <a class="btn btn--solid" href="https://www.planity.com/sainte-anne-barber-34000-montpellier" rel="noopener">Réserver <span class="btn__i"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12 12 4M6 4h6v6"/></svg></span></a>
+          <a class="btn btn--ghost" href="#carte">La carte <span class="btn__i"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3v10M4 9l4 4 4-4"/></svg></span></a>
         </div>
       </aside>
     </div>
@@ -361,8 +386,8 @@ figcaption { margin-top: .8rem; display: flex; justify-content: space-between; g
       <div class="grid-2 grid-2--wide">
         <div>
           <p class="kicker rv f">Le salon</p>
-          <h2 class="disp h-lg split" data-split style="margin-top:1.2rem">À l'ombre du Carré Sainte-Anne.</h2>
-          <p class="body rv f" style="margin-top:1.8rem;--d:120ms">Une rue étroite de l'Écusson, entre les ateliers et les galeries du quartier Sainte-Anne. De la brique, du cuir noir, des lampes à filament, et le temps de faire les choses proprement. Ouvert depuis novembre 2025.</p>
+          <h2 class="disp h-lg split" data-split style="margin-top:1.2rem">Un moment pour soi, à l'ombre du Carré Sainte-Anne.</h2>
+          <p class="body rv f" style="margin-top:1.8rem;--d:120ms">On ne vient pas seulement pour une coupe. On vient s'asseoir, souffler, et laisser faire. Une rue étroite de l'Écusson, de la brique, du cuir noir, des lampes à filament, et le temps qu'il faut. Ouvert depuis novembre 2025.</p>
           <div class="stats rv f" style="--d:220ms">
             <div><b>2025</b><span>Ouverture</span></div>
             <div><b>5,0</b><span>Note Google</span></div>
@@ -370,13 +395,8 @@ figcaption { margin-top: .8rem; display: flex; justify-content: space-between; g
           </div>
         </div>
         <figure class="rv clipw r45"><div class="ph clip"><img src="assets/salon.webp" srcset="assets/salon-m.webp 800w, assets/salon.webp 1600w" sizes="(min-width: 900px) 45vw, 100vw" width="1600" height="900" alt="L'intérieur du salon : miroirs, brique, fauteuils noirs, lumière chaude." loading="lazy" style="object-position: 60% 50%"></div>
-          <figcaption><span>Le salon</span><span>Rue Ranchin</span></figcaption>
+          <figcaption><span><b>Le salon</b>Rue Ranchin</span></figcaption>
         </figure>
-      </div>
-      <div class="strip">
-        <figure class="rv clipw r32"><div class="ph clip"><img src="assets/rue.webp" srcset="assets/rue-m.webp 800w, assets/rue.webp 1600w" sizes="(min-width: 760px) 45vw, 100vw" width="1600" height="900" alt="La rue Ranchin, pierre claire et volets, avec l'enseigne du salon au fond." loading="lazy" style="object-position: 62% 50%"></div><figcaption><span>Rue Ranchin</span><span>L'Écusson</span></figcaption></figure>
-        <figure class="rv clipw r1" style="--d:120ms"><div class="ph clip"><img src="assets/enseigne-3.webp" srcset="assets/enseigne-3-m.webp 800w, assets/enseigne-3.webp 1600w" sizes="(min-width: 760px) 25vw, 50vw" width="1600" height="900" alt="L'enseigne lumineuse et le poteau de barbier sur le mur de brique." loading="lazy"></div><figcaption><span>L'enseigne</span></figcaption></figure>
-        <figure class="rv clipw r1" style="--d:240ms"><div class="ph clip"><img src="assets/outils.webp" srcset="assets/outils-m.webp 800w, assets/outils.webp 1600w" sizes="(min-width: 760px) 25vw, 50vw" width="1600" height="900" alt="Sabots de tondeuse, tondeuse et rasoir sur le tapis du poste de travail." loading="lazy"></div><figcaption><span>Le poste</span></figcaption></figure>
       </div>
     </div>
   </section>
@@ -389,16 +409,28 @@ figcaption { margin-top: .8rem; display: flex; justify-content: space-between; g
           <p class="kicker rv f">Qui vous coiffe</p>
           <h2 class="disp h-lg split" data-split style="margin-top:1.2rem">Tony &amp; Loïc.</h2>
         </div>
-        <p class="body rv f" style="max-width:38ch">Deux barbiers, une façon de travailler : on regarde d'abord, on écoute ensuite, et on ne lâche pas la finition. Dégradés, coupes aux ciseaux, tailles de barbe au rasoir, soins du visage.</p>
+        <p class="body rv f" style="max-width:38ch">Deux barbiers, une façon de travailler : on regarde d'abord, on écoute ensuite, et on prend le temps de finir. Dégradés, coupes aux ciseaux, tailles de barbe au rasoir, soins du visage.</p>
       </div>
       <div class="team">
-        <figure class="rv clipw r45"><div class="ph clip"><img src="assets/barbier.webp" srcset="assets/barbier-m.webp 800w, assets/barbier.webp 1600w" sizes="(min-width: 640px) 50vw, 100vw" width="1600" height="900" alt="Un barbier concentré sur sa coupe, devant le mur de brique du salon." loading="lazy" style="object-position: 45% 30%"></div><figcaption><b>Au fauteuil</b><span>Coupe &amp; dégradé</span></figcaption></figure>
-        <figure class="rv clipw r45" style="--d:150ms"><div class="ph clip"><img src="assets/fauteuil.webp" srcset="assets/fauteuil-m.webp 800w, assets/fauteuil.webp 1600w" sizes="(min-width: 640px) 50vw, 100vw" width="1600" height="900" alt="Un client allongé dans le fauteuil pendant le soin, le barbier penché sur lui." loading="lazy" style="object-position: 35% 40%"></div><figcaption><b>Le soin</b><span>Serviette chaude, rasoir</span></figcaption></figure>
+        <figure class="rv clipw r45"><div class="ph clip"><img src="assets/barbier.webp" srcset="assets/barbier-m.webp 800w, assets/barbier.webp 1600w" sizes="(min-width: 640px) 50vw, 100vw" width="1600" height="900" alt="Un barbier concentré sur sa coupe, devant le mur de brique du salon." loading="lazy" style="object-position: 45% 30%"></div><figcaption><span><b>Au fauteuil</b>Coupe et dégradé</span></figcaption></figure>
+        <figure class="rv clipw r45" style="--d:150ms"><div class="ph clip"><img src="assets/fauteuil.webp" srcset="assets/fauteuil-m.webp 800w, assets/fauteuil.webp 1600w" sizes="(min-width: 640px) 50vw, 100vw" width="1600" height="900" alt="Un client allongé dans le fauteuil pendant le soin, le barbier penché sur lui." loading="lazy" style="object-position: 35% 40%"></div><figcaption><span><b>Le soin</b>Serviette chaude, rasoir</span></figcaption></figure>
       </div>
-      <div class="steps">
-        <div class="rv f"><i>I</i><div><b>On regarde</b><p>La forme du visage, l'implantation, la façon dont vous portez vos cheveux.</p></div></div>
-        <div class="rv f" style="--d:120ms"><i>II</i><div><b>On écoute</b><p>Ce que vous voulez, et ce que vous n'arrivez pas à décrire.</p></div></div>
-        <div class="rv f" style="--d:240ms"><i>III</i><div><b>On finit à la lame</b><p>Contours au rasoir, serviette chaude, rien de laissé au hasard.</p></div></div>
+    </div>
+  </section>
+
+  <!-- Le rituel -->
+  <section class="sec dark" id="rituel" style="padding-top:0">
+    <div class="wrap rituel">
+      <figure class="rv clipw r45"><div class="ph clip"><img src="assets/serviette.webp" srcset="assets/serviette-m.webp 800w, assets/serviette.webp 1600w" sizes="(min-width: 900px) 45vw, 100vw" width="1600" height="900" alt="Serviette chaude brodée posée sur le visage d'un client, les yeux fermés." loading="lazy" style="object-position: 50% 40%"></div><figcaption><span><b>La serviette chaude</b>Le moment où tout ralentit</span></figcaption></figure>
+      <div>
+        <p class="kicker rv f">Le rituel</p>
+        <h2 class="disp h-lg split" data-split style="margin-top:1.2rem">Prendre le temps.</h2>
+        <p class="body rv f" style="margin-top:1.6rem">Pour les hommes qui veulent s'accorder une vraie pause. Chaque passage suit le même rituel, sans montre.</p>
+        <div class="rituel__list rv f" style="--d:120ms">
+          <div><i>01</i><div><b>On regarde, on écoute</b><p>La forme du visage, l'implantation, ce que vous voulez et ce que vous n'arrivez pas à décrire.</p></div><small>5 min</small></div>
+          <div><i>02</i><div><b>La coupe, ou la barbe</b><p>Ciseaux ou tondeuse, dégradé net, contours au rasoir.</p></div><small>30 à 40 min</small></div>
+          <div><i>03</i><div><b>La serviette chaude</b><p>Les yeux fermés. Puis le soin du visage si vous le souhaitez, et une boisson.</p></div><small>Le temps qu'il faut</small></div>
+        </div>
       </div>
     </div>
   </section>
@@ -448,20 +480,25 @@ figcaption { margin-top: .8rem; display: flex; justify-content: space-between; g
       </div>
       <div class="menu__foot rv f">
         <p>Cire nez ou oreilles et soin visage complet sur demande. Les créneaux se réservent sur Planity, ou passez la porte.</p>
-        <a class="btn btn--solid" href="https://www.planity.com/sainte-anne-barber-34000-montpellier" rel="noopener">Réserver un créneau</a>
+        <a class="btn btn--solid" href="https://www.planity.com/sainte-anne-barber-34000-montpellier" rel="noopener">Réserver un créneau <span class="btn__i"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12 12 4M6 4h6v6"/></svg></span></a>
       </div>
     </div>
   </section>
 
   <!-- Galerie -->
-  <section class="marquee dark" aria-label="En salon">
-    <div class="marquee__track" id="track">
-      <figure><img src="assets/ciseaux-m.webp" width="800" height="450" alt="Gros plan sur les ciseaux et le peigne pendant une coupe." loading="lazy"></figure>
-      <figure><img src="assets/enseigne-2-m.webp" width="800" height="450" alt="L'enseigne, le poteau de barbier et l'horloge murale." loading="lazy"></figure>
-      <figure><img src="assets/serviette-m.webp" width="800" height="450" alt="Serviette chaude brodée Sainte-Anne Barber posée sur le visage d'un client." loading="lazy"></figure>
-      <figure><img src="assets/interieur-m.webp" width="800" height="450" alt="Le salon vu de l'entrée, brique et lampes." loading="lazy"></figure>
-      <figure><img src="assets/coiffure-m.webp" width="800" height="450" alt="Coiffage à la tondeuse au fauteuil." loading="lazy"></figure>
-      <figure><img src="assets/cape-m.webp" width="800" height="450" alt="La cape noire brodée du salon." loading="lazy"></figure>
+  <section class="gal dark" aria-label="En salon">
+    <div class="wrap">
+      <div class="gal__head">
+        <div><p class="kicker rv f">En salon</p><h2 class="disp h-md split" data-split style="margin-top:.8rem">Rue Ranchin, au calme.</h2></div>
+        <div class="gal__nav"><button type="button" id="galPrev" aria-label="Précédent"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 8H3M7 4 3 8l4 4"/></svg></button><button type="button" id="galNext" aria-label="Suivant"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button></div>
+      </div>
+      <div class="gal__track" id="gal">
+        <figure class="wide"><div class="ph"><img src="assets/enseigne-2.webp" srcset="assets/enseigne-2-m.webp 800w, assets/enseigne-2.webp 1600w" sizes="(min-width: 900px) 39rem, 88vw" width="1600" height="900" alt="L'enseigne rétroéclairée, le poteau de barbier et l'horloge murale sur la brique." loading="lazy"></div><figcaption><span><b>L'enseigne</b>Brique, laiton, lumière chaude</span></figcaption></figure>
+        <figure><div class="ph"><img src="assets/ciseaux.webp" srcset="assets/ciseaux-m.webp 800w, assets/ciseaux.webp 1600w" sizes="(min-width: 900px) 26rem, 78vw" width="1600" height="900" alt="Gros plan sur les ciseaux et le peigne pendant une coupe." loading="lazy" style="object-position: 40% 50%"></div><figcaption><span><b>Aux ciseaux</b>La finition</span></figcaption></figure>
+        <figure><div class="ph"><img src="assets/interieur.webp" srcset="assets/interieur-m.webp 800w, assets/interieur.webp 1600w" sizes="(min-width: 900px) 26rem, 78vw" width="1600" height="900" alt="Le salon vu de l'entrée, brique et lampes à filament." loading="lazy"></div><figcaption><span><b>Le salon</b>Vu de l'entrée</span></figcaption></figure>
+        <figure class="wide"><div class="ph"><img src="assets/rue.webp" srcset="assets/rue-m.webp 800w, assets/rue.webp 1600w" sizes="(min-width: 900px) 39rem, 88vw" width="1600" height="900" alt="La rue Ranchin, pierre claire et volets, l'enseigne au fond." loading="lazy" style="object-position: 62% 50%"></div><figcaption><span><b>Rue Ranchin</b>L'Écusson, Montpellier</span></figcaption></figure>
+        <figure><div class="ph"><img src="assets/outils.webp" srcset="assets/outils-m.webp 800w, assets/outils.webp 1600w" sizes="(min-width: 900px) 26rem, 78vw" width="1600" height="900" alt="Sabots, tondeuse et rasoir sur le tapis du poste." loading="lazy"></div><figcaption><span><b>Le poste</b>Prêt</span></figcaption></figure>
+      </div>
     </div>
   </section>
 
@@ -489,8 +526,8 @@ figcaption { margin-top: .8rem; display: flex; justify-content: space-between; g
           <h2 class="disp h-xl split" data-split style="margin-top:1.2rem">Réservez votre créneau.</h2>
         </div>
         <div class="hero__cta rv f">
-          <a class="btn btn--solid" href="https://www.planity.com/sainte-anne-barber-34000-montpellier" rel="noopener">Réserver sur Planity <span class="arr" aria-hidden="true">↗</span></a>
-          <a class="btn btn--ghost" href="tel:+33768066436">07 68 06 64 36</a>
+          <a class="btn btn--solid" href="https://www.planity.com/sainte-anne-barber-34000-montpellier" rel="noopener">Réserver sur Planity <span class="btn__i"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12 12 4M6 4h6v6"/></svg></span></a>
+          <a class="btn btn--ghost btn--plain" href="tel:+33768066436">07 68 06 64 36</a>
         </div>
       </div>
       <dl class="infos rv f">
@@ -499,7 +536,7 @@ figcaption { margin-top: .8rem; display: flex; justify-content: space-between; g
         <div><dt>Contact</dt><dd><a href="tel:+33768066436">07 68 06 64 36</a><br><a href="https://www.instagram.com/sainte_anne_barber/" rel="noopener">@sainte_anne_barber</a></dd></div>
         <div><dt>Sans rendez-vous</dt><dd>Passez la porte, on vous prend dès qu'un fauteuil se libère.</dd></div>
       </dl>
-      <figure class="rv clipw r32"><div class="ph clip"><img src="assets/rue-2.webp" srcset="assets/rue-2-m.webp 800w, assets/rue-2.webp 1600w" sizes="100vw" width="1600" height="900" alt="La façade du salon dans la rue Ranchin, en plein jour." loading="lazy" style="object-position: 55% 55%; aspect-ratio: 21 / 9"></div><figcaption><span>La porte, rue Ranchin</span><span>Écusson, à côté du Carré Sainte-Anne</span></figcaption></figure>
+      <figure class="rv clipw r32"><div class="ph clip"><img src="assets/rue-2.webp" srcset="assets/rue-2-m.webp 800w, assets/rue-2.webp 1600w" sizes="100vw" width="1600" height="900" alt="La façade du salon dans la rue Ranchin, en plein jour." loading="lazy" style="object-position: 55% 55%; aspect-ratio: 21 / 9"></div><figcaption><span><b>La porte, rue Ranchin</b>À côté du Carré Sainte-Anne</span></figcaption></figure>
     </div>
   </section>
 
@@ -585,9 +622,10 @@ figcaption { margin-top: .8rem; display: flex; justify-content: space-between; g
     })();
   }
 
-  /* marquee: duplicate track for a seamless loop */
-  var track = document.getElementById('track');
-  track.innerHTML += track.innerHTML;
+  /* galerie : flèches */
+  var gal = document.getElementById('gal');
+  document.getElementById('galPrev').addEventListener('click', function () { gal.scrollBy({ left: -gal.clientWidth * 0.7, behavior: 'smooth' }); });
+  document.getElementById('galNext').addEventListener('click', function () { gal.scrollBy({ left: gal.clientWidth * 0.7, behavior: 'smooth' }); });
 
 
   /* le réel : joue dans la carte dès l'arrivée ; sans fichier, la photo reste */
