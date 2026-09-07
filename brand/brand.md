@@ -1,6 +1,6 @@
 # Sainte-Anne Barber — Référence de marque
 
-> Version 0.2, direction proposée. Pivot validé par Robin : ambiance noire premium, fidèle au salon (brique, cuir noir, enseigne rétroéclairée ambre). Construite sur le langage réel des
+> Version 0.3, direction proposée. Pivot validé par Robin : ambiance noire premium, fidèle au salon (brique, cuir noir, enseigne rétroéclairée ambre). Construite sur le langage réel des
 > avis clients et sur le lieu : 10 rue Ranchin, à l'ombre du Carré Sainte-Anne.
 
 ## Recherche marché (résumé)
@@ -54,29 +54,34 @@ pour tenir « rituel premium »).
 
 | Nom | Hex | Rôle | Usage | Interdit |
 |---|---|---|---|---|
-| Encre | `#0C0B0A` | canvas | fond de page, le noir chaud du salon | jamais #000 |
-| Cuir | `#171412` | surface | plaques (la carte), zones de lecture | pas de bordure claire |
-| Chaux | `#EFE8DC` | ink | titres, corps | jamais #FFF |
-| Chaux douce | `#A69D90` | ink-soft | légendes, folios, secondaire (7,5:1 sur Encre) | pas en corps long |
-| Ambre | `#E3B266` | signature | numéros de chapitre, filet du lien Réserver, folio actif ; < 5 % de la surface | jamais en aplat, jamais en bouton |
-| Pierre | `#E6E0D4` | canvas du colophon | la plaque finale, en plein jour | nulle part ailleurs |
-| Encre du jour | `#141210` | ink sur Pierre | texte du colophon | — |
+| Noir | `#0E0E0E` | canvas sombre | hero, équipe, galerie, réservation, pied de page | jamais #000 |
+| Charbon | `#1A1A19` | surface sombre | fonds d'images en attente | — |
+| Crème | `#F4F1E8` | canvas clair | le salon, la carte, les avis | jamais #FFF |
+| Crème 2 | `#ECE8DC` | surface claire | fonds d'images sur crème | — |
+| Gris chaud | `#9C9A92` / `#6B6962` | texte secondaire | légendes, labels, notes (sombre / clair) | pas en corps long |
 
-Contraste mesuré : Chaux sur Encre ≈ 16:1 · Chaux douce sur Encre ≈ 7,5:1 · Ambre sur
-Encre ≈ 10:1 · Encre du jour sur Pierre ≈ 13:1. Tous les neutres sont teintés chaud
-(3 à 6 %) : aucun gris pur. Ombres teintées vers l'encre chaude.
+Pas de couleur d'accent : le noir et la crème font tout, comme chez Hagi's et Crisp.
+L'ambre n'existe que dans les photos (l'enseigne). Les sections alternent noir et
+crème, coupes franches.
 
 ## Typographie
 
-- **Titrage : Bodoni Moda** (Google Fonts, OFL, variable, axe optique). Sert l'effet
-  « rare, net » par son contraste de trait extrême : les déliés sont fins comme le
-  fil d'une lame. Graisse 400 à 500, interlettrage −2 % au-dessus de 48 px,
-  interlignage 0,98 à 1,05, jamais en capitales sur plus de deux mots.
-- **Texte : Geist** (Google Fonts, OFL). Grotesque neutre, chiffres tabulaires
-  natifs, disparaît derrière le contenu. Corps 17 à 18 px, interlignage 1,6,
-  mesure 62 ch. Folios et cartels en 13 px, capitales espacées +8 %.
+Références validées par Robin : hagisbarbering.com (Numbered Studio, grotesque GT +
+serif fin Roxborough, crème #FFFDED / noir #151515, GSAP expo.out) et crispmtl.com
+(Helvetica Neue Bold Extended en capitales, serif Perfectly Nineties en accent,
+#FAFAFA / #0A090C, offres en listes claires par niveau).
 
-Échelle : 88 / 56 / 36 / 24 (Bodoni Moda) · 18 / 15 / 13 (Geist).
+- **Titrage : Archivo Expanded** (Google Fonts, OFL, variable, axe largeur 125 %),
+  graisse 800, capitales, interlettrage −1,5 %, interlignage 0,9. L'équivalent
+  libre d'une Helvetica Neue Bold Extended : massif, sûr, urbain.
+- **Accent : Instrument Serif italique** (Google Fonts, OFL). Un mot par titre,
+  jamais plus : « À l'ombre du *Carré* Sainte-Anne », « La carte, *sans surprise*. »
+  Sert aussi aux citations clients.
+- **Texte : Archivo** largeur normale, 400 et 600. Corps 16 px, interlignage 1,65.
+  Labels en capitales 11 à 12 px, interlettrage +14 à +20 %.
+
+Bodoni Moda et Geist sont abandonnées (v0.1 et v0.2) : jugées « bas de gamme » par
+Robin sur mobile.
 
 ## Logo (direction, pas de dessin)
 
@@ -128,21 +133,11 @@ centré partout · « scroll » ou flèche d'incitation.
 
 ```css
 :root {
-  --color-canvas: #0C0B0A;        /* Encre */
-  --color-surface: #171412;       /* Cuir */
-  --color-ink: #EFE8DC;           /* Chaux */
-  --color-ink-soft: #A69D90;      /* Chaux douce */
-  --color-signature: #E3B266;     /* Ambre */
-  --color-day-canvas: #E6E0D4;    /* Pierre, colophon */
-  --color-day-ink: #141210;
-  --font-display: "Bodoni Moda", "Didot", Georgia, serif;
-  --font-text: "Geist", system-ui, -apple-system, sans-serif;
-}
-/* Mapping scrollcraft */
-:root {
-  --sc-canvas: var(--color-canvas);  --sc-surface: var(--color-surface);
-  --sc-ink: var(--color-ink);        --sc-ink-soft: var(--color-ink-soft);
-  --sc-accent: var(--color-signature); --sc-accent-ink: var(--color-canvas);
-  --sc-font-display: var(--font-display); --sc-font-text: var(--font-text);
+  --noir: #0E0E0E; --charbon: #1A1A19;
+  --creme: #F4F1E8; --creme-2: #ECE8DC;
+  --sans: "Archivo", "Helvetica Neue", Arial, sans-serif;   /* titres : font-stretch 125 %, 800 */
+  --serif: "Instrument Serif", "Times New Roman", serif;    /* accent italique */
+  --ease: cubic-bezier(0.16, 1.08, 0.38, 0.98);              /* expo.out, comme Hagi's */
+  --radius: 3px;                                             /* boutons, images */
 }
 ```

@@ -156,3 +156,17 @@ fois de suite la même, un seul scrub, un seul pic.
 6. Le CTA : Planity directement, ou téléphone en premier ?
 7. Avez-vous le droit de citer les avis (ils sont publics, mais on demande) ?
 8. Ludovic = Loïc ? Deux fauteuils ou plus ? Date d'ouverture confirmée ?
+
+
+## Journal
+
+- **v1 (7 sept., 20h)** : éditorial chapitré sur pierre claire, pic « miroir embué ».
+  Robin : « très bas de gamme ». Structure demandée : le lieu en hero, qui coiffe,
+  la carte en menu.
+- **v2 (20h30)** : hero photo, équipe, carte à points de conduite, Bodoni Moda + Geist.
+  Robin : « je n'aime pas du tout les polices ». Références données :
+  hagisbarbering.com (design, transitions) et crispmtl.com (branding, offres claires).
+- **v3 (21h)** : Archivo Expanded 800 en capitales + Instrument Serif italique,
+  alternance noir / crème, intro logo puis rideau, titres en mots masqués qui montent,
+  images en clip-reveal, marquee de photos, carte en listes claires façon Crisp.
+  Le moteur scrollcraft n'est plus chargé : reveals et parallaxe écrits à la main.
