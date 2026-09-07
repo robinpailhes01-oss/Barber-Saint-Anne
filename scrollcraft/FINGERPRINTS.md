@@ -63,3 +63,5 @@ If you want to see what a filled-in table looks like, and which shapes tend to
 collide, read `EXAMPLES.md` in the scrollcraft repository. Treat it as
 illustration only: those rows are somebody else's builds and they do **not**
 constrain yours.
+
+| sainte-anne-barber | chaptered editorial | folio de marge (numéro + titre de chapitre) et un lien texte « Réserver un créneau » | page de titre : logo + mot-symbole sur l'encre, aucun média | titre → flow+parallax → intertitre → pin (miroir embué + photo en push-in) → reveal cartels → flow portraits → colophon inversé ; 7 sections, 11,4 vh desktop / 12,8 vh mobile | plaque pierre claire en plein jour, CTA en texte courant, « À demain, 9h. » | le miroir s'embue, la phrase s'écrit dans la buée, la serviette essuie | monde : photos documentaires réelles du salon, noir chaud + ambre | premier build du registre, rien de partagé |
