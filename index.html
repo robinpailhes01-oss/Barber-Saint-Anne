@@ -89,6 +89,7 @@ body.locked { overflow: hidden; }
 /* ---------- header ---------- */
 .hdr { position: fixed; inset-inline: 0; top: 0; z-index: 90; padding-top: env(safe-area-inset-top); color: var(--creme); transition: color .35s var(--ease), background-color .35s var(--ease), border-color .35s var(--ease), transform .8s var(--ease); border-bottom: 1px solid transparent; transform: translateY(-100%); }
 body.ready .hdr { transform: none; }
+.reel ~ .hero { min-height: 92svh; }
 .hdr.on-light { color: var(--noir); }
 .hdr.is-solid { background: rgba(14,14,14,.82); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-color: rgba(244,241,232,.1); }
 .hdr.is-solid.on-light { background: rgba(244,241,232,.86); border-color: rgba(14,14,14,.1); }
@@ -104,6 +105,21 @@ body.ready .hdr { transform: none; }
 .hdr .btn--solid { background: var(--creme); color: var(--noir); border-color: var(--creme); }
 .hdr.on-light .btn--solid { background: var(--noir); color: var(--creme); border-color: var(--noir); }
 @media (min-width: 900px) { .hdr nav { display: flex; } .hdr__in { height: 5rem; } }
+
+
+/* ---------- reel : première section, sans un mot ---------- */
+.reel { position: relative; height: 100svh; height: 100dvh; background: #050505; overflow: clip; isolation: isolate; }
+.reel.is-off { display: none; }
+.reel__bg { position: absolute; inset: -6%; z-index: 0; width: 112%; height: 112%; object-fit: cover; filter: blur(28px) brightness(.45); transform: scale(1.1); pointer-events: none; }
+.reel__video { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; object-fit: cover; }
+@media (min-width: 760px) and (min-aspect-ratio: 1/1) {
+  .reel__video { left: 50%; top: 0; width: auto; height: 100%; aspect-ratio: 9 / 16; transform: translateX(-50%); object-fit: cover; }
+}
+.reel__tap { position: absolute; inset: 0; z-index: 2; display: none; place-items: center; background: transparent; border: 0; cursor: pointer; }
+.reel.needs-tap .reel__tap { display: grid; }
+.reel__tap span { width: 4.5rem; height: 4.5rem; border-radius: 50%; border: 1px solid rgba(244,241,232,.7); display: grid; place-items: center; backdrop-filter: blur(6px); }
+.reel__tap span::before { content: ""; width: 0; height: 0; border-left: 1.1rem solid var(--creme); border-top: .7rem solid transparent; border-bottom: .7rem solid transparent; margin-left: .25rem; }
+.reel__fade { position: absolute; inset-inline: 0; bottom: 0; height: 22%; z-index: 2; pointer-events: none; background: linear-gradient(to top, var(--noir), transparent); }
 
 /* ---------- hero ---------- */
 .hero { position: relative; min-height: 100svh; min-height: 100dvh; display: grid; align-items: end; isolation: isolate; overflow: clip; }
@@ -255,6 +271,16 @@ figcaption { margin-top: .8rem; display: flex; justify-content: space-between; g
 </header>
 
 <main id="top">
+
+  <!-- Le réel Instagram, en ouverture, sans un mot -->
+  <section class="reel dark" id="reel" aria-label="Le salon en vidéo">
+    <video class="reel__bg" id="reelBg" muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1"></video>
+    <video class="reel__video" id="reelVideo" muted loop playsinline autoplay preload="auto" aria-label="Vidéo du salon Sainte-Anne Barber">
+      <source src="assets/reel.mp4" type="video/mp4">
+    </video>
+    <button class="reel__tap" id="reelTap" type="button" aria-label="Lire la vidéo"><span></span></button>
+    <div class="reel__fade" aria-hidden="true"></div>
+  </section>
 
   <!-- Hero : le lieu -->
   <section class="hero dark" aria-label="Le salon">
@@ -467,9 +493,9 @@ figcaption { margin-top: .8rem; display: flex; justify-content: space-between; g
   });
 
   /* reveal on entry, once */
-  var targets = document.querySelectorAll('.rv, .split');
+  var targets = document.querySelectorAll('.rv, .split'), io = null;
   if ('IntersectionObserver' in window) {
-    var io = new IntersectionObserver(function (es) {
+    io = new IntersectionObserver(function (es) {
       es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } });
     }, { rootMargin: '0px 0px -10% 0px', threshold: 0.12 });
     targets.forEach(function (t) { if (!t.closest('.hero')) io.observe(t); });
@@ -510,12 +536,34 @@ figcaption { margin-top: .8rem; display: flex; justify-content: space-between; g
   var track = document.getElementById('track');
   track.innerHTML += track.innerHTML;
 
+
+  /* le réel : démarre à l'arrivée, se cache si la vidéo manque */
+  var reel = document.getElementById('reel'), rv = document.getElementById('reelVideo'), rbg = document.getElementById('reelBg'), tap = document.getElementById('reelTap');
+  function reelOff() { reel.classList.add('is-off'); }
+  rv.addEventListener('error', reelOff, true);
+  rv.querySelector('source').addEventListener('error', reelOff);
+  rv.addEventListener('loadedmetadata', function () {
+    if (!rv.videoWidth) { reelOff(); return; }
+    if (window.matchMedia('(min-width: 760px) and (min-aspect-ratio: 1/1)').matches) { rbg.src = rv.currentSrc; rbg.play().catch(function () {}); }
+  });
+  function startReel() {
+    if (reel.classList.contains('is-off')) return;
+    try { rv.currentTime = 0; } catch (e) {}
+    var p = rv.play();
+    if (p && p.catch) p.catch(function () { reel.classList.add('needs-tap'); });
+  }
+  tap.addEventListener('click', function () { reel.classList.remove('needs-tap'); rv.play(); rbg.play().catch(function () {}); });
+  document.addEventListener('touchstart', function once() { if (reel.classList.contains('needs-tap')) { reel.classList.remove('needs-tap'); rv.play(); } document.removeEventListener('touchstart', once); }, { passive: true });
+  document.addEventListener('visibilitychange', function () { if (!document.hidden && !reel.classList.contains('is-off')) rv.play().catch(function () {}); });
+
   /* intro */
   var intro = document.getElementById('intro');
   var seen = false; try { seen = sessionStorage.getItem('sab-intro') === '1'; } catch (e) {}
   function reveal() {
     document.body.classList.remove('locked'); document.body.classList.add('ready');
-    document.querySelectorAll('.hero .rv, .hero .split').forEach(function (t) { t.classList.add('on'); });
+    startReel();
+    /* the hero now sits under the reel: reveal it when it actually comes into view */
+    document.querySelectorAll('.hero .rv, .hero .split').forEach(function (t) { if (io) io.observe(t); else t.classList.add('on'); });
   }
   if (seen || reduced) { intro.classList.add('gone'); reveal(); }
   else {
