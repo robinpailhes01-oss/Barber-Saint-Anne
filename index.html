@@ -27,6 +27,8 @@
   --ink: #F4F1E8; --ink-soft: #9C9A92; --line: rgba(244,241,232,.14); --line-strong: rgba(244,241,232,.3);
   --sans: "Archivo", "Helvetica Neue", Arial, sans-serif;
   --serif: "Instrument Serif", "Times New Roman", serif;
+  --amber: #D9A24E; --amber-ink: #1A1408;
+  --r-img: 22px; --r-pill: 999px;
   --ease: cubic-bezier(0.16, 1.08, 0.38, 0.98);
   --ease-io: cubic-bezier(0.77, 0, 0.175, 1);
   --gutter: clamp(1.25rem, 4.5vw, 4rem);
@@ -47,15 +49,14 @@ a { color: inherit; }
 .dark  { background: var(--noir); color: var(--creme); }
 
 /* ---------- type ---------- */
-.disp { font-family: var(--sans); font-stretch: 125%; font-weight: 800; text-transform: uppercase; letter-spacing: -0.015em; line-height: 0.92; margin: 0; text-wrap: balance; }
+.disp { font-family: var(--sans); font-stretch: 68%; font-weight: 700; letter-spacing: -0.01em; line-height: 0.9; margin: 0; text-wrap: balance; }
 .disp .it, .it { font-family: var(--serif); font-style: italic; font-weight: 400; font-stretch: 100%; text-transform: none; letter-spacing: 0; line-height: .9; }
-.disp .it { font-size: 1.02em; }
-.h-xl { font-size: clamp(3rem, 10vw, 9.5rem); }
-.h-lg { font-size: clamp(2.3rem, 5.6vw, 5.6rem); }
+.disp .it { font-size: 1em; }
+.h-xl { font-size: clamp(3.6rem, 11vw, 11rem); }
+.h-lg { font-size: clamp(3rem, 7.4vw, 7.6rem); }
 .h-md { font-size: clamp(1.7rem, 3.4vw, 3.2rem); }
-.kicker { font-size: .7rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-soft); display: flex; align-items: center; gap: .8rem; margin: 0; }
-.kicker::before { flex: none; }
-.kicker::before { content: ""; width: 1.6rem; height: 1px; background: currentColor; opacity: .7; }
+.kicker { font-size: .8rem; font-weight: 500; letter-spacing: .02em; color: var(--ink-soft); display: flex; align-items: center; gap: .6rem; margin: 0; }
+.kicker::before { content: ""; width: .45rem; height: .45rem; border-radius: 50%; background: var(--amber); flex: none; }
 .lede { font-size: clamp(1.1rem, 1.5vw, 1.35rem); line-height: 1.45; max-width: 36ch; margin: 0; }
 .body { font-size: 1rem; line-height: 1.65; max-width: 56ch; margin: 0; color: var(--ink-soft); }
 .light .body { color: #4A4944; }
@@ -64,13 +65,17 @@ a { color: inherit; }
 .nb { white-space: nowrap; }
 
 /* ---------- buttons ---------- */
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: .6rem; min-height: 3.1rem; padding: 0 1.5rem; border-radius: 3px; border: 1px solid transparent; font-family: var(--sans); font-size: .8rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; text-decoration: none; white-space: nowrap; cursor: pointer; transition: background-color .35s var(--ease), color .35s var(--ease), border-color .35s var(--ease), transform .35s var(--ease); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: .7rem; min-height: 3.1rem; padding: 0 1.5rem; border-radius: var(--r-pill); border: 1px solid transparent; font-family: var(--sans); font-size: .9rem; font-weight: 500; letter-spacing: 0; text-decoration: none; white-space: nowrap; cursor: pointer; transition: background-color .35s var(--ease), color .35s var(--ease), border-color .35s var(--ease), transform .35s var(--ease); }
 .btn:active { transform: translateY(1px); }
 .dark .btn--solid, .btn--solid { background: var(--creme); color: var(--noir); border-color: var(--creme); }
 .dark .btn--solid:hover { background: #fff; border-color: #fff; }
 .light .btn--solid { background: var(--noir); color: var(--creme); border-color: var(--noir); }
 .light .btn--solid:hover { background: #000; }
-.btn--ghost { background: transparent; color: currentColor; border-color: var(--line-strong); }
+.btn--ghost { background: rgba(255,255,255,.06); color: currentColor; border-color: var(--line-strong); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+.btn--amber { background: var(--amber); color: var(--amber-ink); border-color: var(--amber); }
+.btn--amber:hover { background: #E4B061; }
+.btn .arr { display: inline-block; transition: transform .4s var(--ease); }
+.btn:hover .arr { transform: translate(2px,-2px); }
 .btn--ghost:hover { border-color: currentColor; }
 .link { display: inline-flex; align-items: center; gap: .55rem; font-size: .8rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; text-decoration: none; position: relative; padding-bottom: .35rem; }
 .link::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: currentColor; transform-origin: left; transform: scaleX(1); transition: transform .5s var(--ease); }
@@ -89,57 +94,95 @@ body.locked { overflow: hidden; }
 /* ---------- header ---------- */
 .hdr { position: fixed; inset-inline: 0; top: 0; z-index: 90; padding-top: env(safe-area-inset-top); color: var(--creme); transition: color .35s var(--ease), background-color .35s var(--ease), border-color .35s var(--ease), transform .8s var(--ease); border-bottom: 1px solid transparent; transform: translateY(-100%); }
 body.ready .hdr { transform: none; }
-.reel ~ .hero { min-height: 92svh; }
+.hero__cta { display: flex; flex-wrap: wrap; gap: .8rem; }
 .hdr.on-light { color: var(--noir); }
 .hdr.is-solid { background: rgba(14,14,14,.82); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-color: rgba(244,241,232,.1); }
 .hdr.is-solid.on-light { background: rgba(244,241,232,.86); border-color: rgba(14,14,14,.1); }
 .hdr__in { display: flex; align-items: center; justify-content: space-between; gap: 1rem; height: 4.5rem; }
 .brand { display: inline-flex; align-items: center; gap: .75rem; text-decoration: none; }
-.brand img { width: 2.4rem; }
-@media (max-width: 600px) { .brand .w { display: none; } .brand img { width: 2.8rem; } }
+.brand__mark { width: 2.6rem; height: 2.6rem; border-radius: 50%; background: var(--creme); display: grid; place-items: center; overflow: hidden; }
+.brand__mark img { width: 2rem; }
+.hdr.on-light .brand__mark { background: var(--noir); }
+.brand .w { display: none; }
+.hdr__right { display: flex; align-items: center; gap: 1rem; }
+.hdr .ig { width: 2.6rem; height: 2.6rem; border-radius: 50%; display: grid; place-items: center; border: 1px solid var(--line-strong); color: inherit; }
+.hdr .ig svg { width: 1.05rem; height: 1.05rem; }
+@media (max-width: 600px) { .hdr .ig { display: none; } }
 .brand .w { font-weight: 800; font-stretch: 125%; text-transform: uppercase; letter-spacing: .02em; font-size: .82rem; white-space: nowrap; }
 .hdr nav { display: none; gap: 2rem; }
-.hdr nav a { font-size: .74rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; text-decoration: none; opacity: .8; transition: opacity .3s; }
+.hdr nav a { font-size: .9rem; font-weight: 500; letter-spacing: 0; text-decoration: none; opacity: .85; transition: opacity .3s; }
 .hdr nav a:hover { opacity: 1; }
-.hdr .btn { min-height: 2.6rem; padding: 0 1.1rem; font-size: .72rem; }
+.hdr .btn { min-height: 2.6rem; padding: 0 1.15rem; font-size: .85rem; }
 .hdr .btn--solid { background: var(--creme); color: var(--noir); border-color: var(--creme); }
 .hdr.on-light .btn--solid { background: var(--noir); color: var(--creme); border-color: var(--noir); }
 @media (min-width: 900px) { .hdr nav { display: flex; } .hdr__in { height: 5rem; } }
 
 
-/* ---------- reel : première section, sans un mot ---------- */
-.reel { position: relative; height: 100svh; height: 100dvh; background: #050505; overflow: clip; isolation: isolate; }
-.reel.is-off { display: none; }
-.reel__bg { position: absolute; inset: -6%; z-index: 0; width: 112%; height: 112%; object-fit: cover; filter: blur(28px) brightness(.45); transform: scale(1.1); pointer-events: none; }
-.reel__video { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; object-fit: cover; }
-@media (min-width: 760px) and (min-aspect-ratio: 1/1) {
-  .reel__video { left: 50%; top: 0; width: auto; height: 100%; aspect-ratio: 9 / 16; transform: translateX(-50%); object-fit: cover; }
+/* ---------- stage : réel + titre superposé + carte rapide ---------- */
+.stage { position: relative; min-height: 100svh; min-height: 100dvh; background: #0A0A0A; overflow: clip; isolation: isolate; color: var(--creme); }
+.stage__bg, .stage__bgimg { position: absolute; inset: -8%; width: 116%; height: 116%; object-fit: cover; z-index: 0; filter: blur(22px) brightness(.5) saturate(.8); transform: scale(1.06); pointer-events: none; }
+.stage__bg { display: none; }
+.stage.has-video .stage__bg { display: block; } .stage.has-video .stage__bgimg { display: none; }
+.stage__tint { position: absolute; inset: 0; z-index: 1; background: radial-gradient(90% 70% at 30% 40%, rgba(58,52,44,.35), transparent 70%), linear-gradient(to top, rgba(10,10,10,.9), rgba(10,10,10,.2) 45%, rgba(10,10,10,.35)); }
+.stage__in { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr; gap: 2rem; padding-top: 6.5rem; padding-bottom: 2rem; min-height: 100svh; min-height: 100dvh; align-content: end; }
+.stage__main { position: relative; display: grid; align-content: end; }
+.stage__title { position: relative; z-index: 1; margin: 0; line-height: .82; letter-spacing: -0.02em; font-stretch: 62%; font-weight: 700; text-transform: uppercase; }
+.stage__title .w { display: inline-block; }
+.stage__title .l1, .stage__title .l2 { display: block; }
+.stage__card { position: relative; z-index: 2; border-radius: var(--r-img); overflow: clip; background: #151515; box-shadow: 0 30px 80px -20px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.06); }
+.stage__card video, .stage__card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+.stage__card video { opacity: 0; transition: opacity .8s var(--ease); }
+.stage.has-video .stage__card video { opacity: 1; }
+.stage__tap { position: absolute; inset: 0; display: none; place-items: center; background: transparent; border: 0; cursor: pointer; z-index: 3; }
+.stage.needs-tap .stage__tap { display: grid; }
+.stage__tap span { width: 4rem; height: 4rem; border-radius: 50%; border: 1px solid rgba(244,241,232,.7); display: grid; place-items: center; backdrop-filter: blur(6px); }
+.stage__tap span::before { content: ""; border-left: 1rem solid var(--creme); border-top: .65rem solid transparent; border-bottom: .65rem solid transparent; margin-left: .2rem; }
+.glass { background: rgba(244,241,232,.08); border: 1px solid rgba(244,241,232,.14); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-radius: 18px; padding: 1rem 1.15rem; display: grid; gap: .35rem; max-width: 22rem; }
+.glass b { font-stretch: 68%; font-weight: 700; font-size: 1.8rem; line-height: 1; display: flex; align-items: center; gap: .5rem; }
+.glass b .star { color: var(--amber); font-size: 1.1rem; }
+.glass p { margin: 0; font-size: .85rem; line-height: 1.45; color: rgba(244,241,232,.75); }
+.stage__ctas { display: flex; flex-wrap: wrap; gap: .7rem; }
+.stage__side { display: grid; gap: 1.5rem; align-content: end; }
+.quick { list-style: none; margin: 0; padding: 0; display: grid; }
+.quick li { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: .9rem 0; border-top: 1px solid rgba(244,241,232,.16); font-size: 1.05rem; }
+.quick li:last-child { border-bottom: 1px solid rgba(244,241,232,.16); }
+.quick b { font-stretch: 68%; font-weight: 700; font-size: 1.35rem; font-variant-numeric: tabular-nums; }
+.quick .btn { min-height: 2.5rem; padding: 0 1rem; font-size: .85rem; }
+.stage__foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 1.5rem; margin-top: 1.5rem; }
+.badge { width: 6.5rem; height: 6.5rem; position: relative; display: none; }
+.badge svg { width: 100%; height: 100%; animation: spin 18s linear infinite; }
+.badge svg text { font-family: var(--sans); font-size: 11.5px; letter-spacing: .18em; text-transform: uppercase; fill: rgba(244,241,232,.7); font-weight: 500; }
+.badge::after { content: ""; position: absolute; inset: 42%; border-radius: 50%; background: var(--amber); }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (max-width: 899px) {
+  .stage__card { position: absolute; inset: 0; border-radius: 0; box-shadow: none; z-index: 0; }
+  .stage__card::after { content: ""; position: absolute; inset: 0; z-index: 2; background: linear-gradient(to top, rgba(10,10,10,.94) 0%, rgba(10,10,10,.4) 45%, rgba(10,10,10,.25) 100%); pointer-events: none; }
+  .stage__main { min-height: 100svh; min-height: 100dvh; }
+  .stage__in { padding: 0 var(--gutter); }
+  .stage__title { font-size: clamp(4rem, 19vw, 8rem); padding-top: 6rem; }
+  .stage__title .l2 { text-align: right; }
+  .stage__foot { padding-bottom: 1.25rem; }
+  .quick { display: none; }
+  .stage__side { padding-bottom: 1.5rem; }
 }
-.reel__tap { position: absolute; inset: 0; z-index: 2; display: none; place-items: center; background: transparent; border: 0; cursor: pointer; }
-.reel.needs-tap .reel__tap { display: grid; }
-.reel__tap span { width: 4.5rem; height: 4.5rem; border-radius: 50%; border: 1px solid rgba(244,241,232,.7); display: grid; place-items: center; backdrop-filter: blur(6px); }
-.reel__tap span::before { content: ""; width: 0; height: 0; border-left: 1.1rem solid var(--creme); border-top: .7rem solid transparent; border-bottom: .7rem solid transparent; margin-left: .25rem; }
-.reel__fade { position: absolute; inset-inline: 0; bottom: 0; height: 22%; z-index: 2; pointer-events: none; background: linear-gradient(to top, var(--noir), transparent); }
-
-/* ---------- hero ---------- */
-.hero { position: relative; min-height: 100svh; min-height: 100dvh; display: grid; align-items: end; isolation: isolate; overflow: clip; }
-.hero__media { position: absolute; inset: 0; z-index: 0; overflow: clip; }
-.hero__media img { width: 100%; height: 100%; object-fit: cover; object-position: 62% 42%; transform: scale(1.12); transition: transform 2.4s var(--ease); will-change: transform; }
-body.ready .hero__media img { transform: scale(1.04); }
-.hero__scrim { position: absolute; inset: 0; z-index: 1; background: linear-gradient(to top, rgba(14,14,14,.94) 0%, rgba(14,14,14,.62) 34%, rgba(14,14,14,.18) 62%, transparent 85%), linear-gradient(to bottom, rgba(14,14,14,.5), transparent 24%); }
-.hero__in { position: relative; z-index: 2; padding-top: 8rem; padding-bottom: clamp(2rem, 5vh, 3.5rem); display: grid; gap: 2.2rem; }
-.hero h1 { font-size: clamp(2.4rem, 8.7vw, 9.2rem); line-height: .9; }
-.hero__sub { display: grid; grid-template-columns: 1fr; align-items: end; gap: 1.5rem 3rem; }
-@media (min-width: 860px) { .hero__sub { grid-template-columns: 1fr auto; } }
-.hero__sub > * { min-width: 0; }
-.hero__sub .lede { font-family: var(--serif); font-style: italic; font-size: clamp(1.4rem, 2.6vw, 2.3rem); line-height: 1.1; max-width: 26ch; }
-.hero__cta { display: flex; flex-wrap: wrap; gap: .8rem; min-width: 0; }
-@media (max-width: 480px) { .hero__cta .btn { flex: 1 1 100%; } }
-.hero__bar { display: grid; gap: .6rem 2.5rem; border-top: 1px solid var(--line); padding-top: 1.1rem; }
-.hero__bar span { font-size: .74rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; color: var(--ink-soft); }
-.hero__bar b { color: var(--creme); font-weight: 600; }
-@media (min-width: 720px) { .hero__bar { grid-template-columns: auto auto auto; justify-content: space-between; } }
-@media (max-width: 720px) { .hero__media img { object-position: 60% 45%; } }
+@media (min-width: 900px) {
+  .stage { height: 100svh; height: 100dvh; min-height: 640px; }
+  .stage__in { display: block; position: absolute; inset: 0; padding: 0; min-height: 0; max-width: none; }
+  .stage__main { position: static; display: block; }
+  .stage__title { position: absolute; left: var(--gutter); top: 6rem; font-size: clamp(5.5rem, 12.2vw, 14.5rem); line-height: .8; z-index: 1; }
+  .stage__title .l2 { padding-left: 0; }
+  .stage__card { position: absolute; left: calc(var(--gutter) + 11vw); bottom: 2rem; height: min(72vh, 720px); aspect-ratio: 9 / 16; width: auto; margin: 0; z-index: 2; will-change: transform; }
+  .stage__foot { position: absolute; left: calc(var(--gutter) + 11vw + min(72vh, 720px) * 9 / 16 + 2rem); bottom: 2rem; margin: 0; align-items: flex-end; max-width: 26rem; z-index: 2; }
+  .stage__side { position: absolute; right: var(--gutter); bottom: 2rem; width: clamp(17rem, 24vw, 24rem); z-index: 3; }
+}
+@media (min-width: 1500px) { .badge { display: block; } }
+@media (min-width: 1200px) { .stage__ctas { display: none; } }
+@media (min-width: 900px) and (max-width: 1199px) {
+  .quick { display: none; }
+  .badge { display: none; }
+  .glass { max-width: 16rem; }
+}
+@media (prefers-reduced-motion: reduce) { .badge svg { animation: none; } }
 
 /* ---------- sections ---------- */
 .sec { padding-block: var(--section); position: relative; }
@@ -149,8 +192,8 @@ body.ready .hero__media img { transform: scale(1.04); }
 .grid-2 { display: grid; gap: clamp(2rem, 5vw, 4.5rem); grid-template-columns: 1fr; align-items: start; }
 @media (min-width: 900px) { .grid-2 { grid-template-columns: 1fr 1fr; } .grid-2--wide { grid-template-columns: 1.15fr 1fr; } }
 figure { margin: 0; }
-figcaption { margin-top: .8rem; display: flex; justify-content: space-between; gap: 1rem; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; color: var(--ink-soft); }
-.ph { overflow: clip; border-radius: 3px; background: var(--charbon); }
+figcaption { margin-top: .8rem; display: flex; justify-content: space-between; gap: 1rem; font-size: .85rem; color: var(--ink-soft); }
+.ph { overflow: clip; border-radius: var(--r-img); background: var(--charbon); }
 .light .ph { background: var(--creme-2); }
 .ph img { width: 100%; object-fit: cover; }
 .r45 img { aspect-ratio: 4 / 5; } .r34 img { aspect-ratio: 3 / 4; } .r43 img { aspect-ratio: 4 / 3; } .r32 img { aspect-ratio: 3 / 2; } .r1 img { aspect-ratio: 1; }
@@ -176,8 +219,8 @@ figcaption { margin-top: .8rem; display: flex; justify-content: space-between; g
 /* le salon */
 .stats { display: grid; gap: 1.5rem; grid-template-columns: repeat(3, auto); justify-content: start; margin-top: 2.4rem; padding-top: 1.6rem; border-top: 1px solid var(--line); }
 .stats div { display: grid; gap: .3rem; }
-.stats b { font-stretch: 125%; font-weight: 800; font-size: clamp(1.8rem, 3.4vw, 3rem); line-height: 1; letter-spacing: -0.02em; }
-.stats span { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; color: var(--ink-soft); }
+.stats b { font-stretch: 68%; font-weight: 700; font-size: clamp(1.8rem, 3.4vw, 3rem); line-height: 1; letter-spacing: -0.02em; }
+.stats span { font-size: .85rem; color: var(--ink-soft); }
 @media (max-width: 560px) { .stats { gap: 1rem 1.5rem; } }
 .strip { display: grid; gap: 1rem; grid-template-columns: 1fr 1fr; margin-top: clamp(2rem, 5vw, 4rem); }
 @media (min-width: 760px) { .strip { grid-template-columns: 1.4fr 1fr 1fr; align-items: end; } }
@@ -188,25 +231,25 @@ figcaption { margin-top: .8rem; display: flex; justify-content: space-between; g
 .team { display: grid; gap: 1rem; grid-template-columns: 1fr; }
 @media (min-width: 640px) { .team { grid-template-columns: 1fr 1fr; gap: 1.25rem; } }
 .team figcaption { margin-top: 1rem; align-items: baseline; }
-.team figcaption b { font-stretch: 125%; font-weight: 800; font-size: 1.1rem; letter-spacing: 0; color: var(--creme); }
+.team figcaption b { font-stretch: 68%; font-weight: 700; font-size: 1.4rem; letter-spacing: 0; color: var(--creme); }
 .steps { display: grid; gap: 0; margin-top: clamp(3rem, 6vw, 5rem); border-top: 1px solid var(--line); }
 .steps > div { display: grid; grid-template-columns: 4rem 1fr; gap: 1rem; padding: 1.5rem 0; border-bottom: 1px solid var(--line); }
 .steps i { font-family: var(--serif); font-style: italic; font-size: 2rem; line-height: 1; color: var(--ink-soft); }
-.steps b { display: block; font-stretch: 125%; font-weight: 800; text-transform: uppercase; font-size: .95rem; letter-spacing: .02em; margin-bottom: .4rem; }
+.steps b { display: block; font-stretch: 68%; font-weight: 700; font-size: 1.5rem; letter-spacing: 0; margin-bottom: .4rem; }
 .steps p { margin: 0; color: var(--ink-soft); max-width: 40ch; font-size: .95rem; }
 @media (min-width: 900px) { .steps { grid-template-columns: repeat(3, 1fr); gap: 3rem; border-top: 0; } .steps > div { grid-template-columns: 1fr; border-top: 1px solid var(--line); border-bottom: 0; } }
 
 /* carte (Crisp-clear) */
 .menu { display: grid; gap: clamp(2.5rem, 5vw, 4rem); grid-template-columns: 1fr; }
 @media (min-width: 900px) { .menu { grid-template-columns: 1fr 1fr; column-gap: clamp(3rem, 6vw, 6rem); } }
-.mg h3 { margin: 0 0 .4rem; font-stretch: 125%; font-weight: 800; text-transform: uppercase; font-size: 1rem; letter-spacing: .04em; }
+.mg h3 { margin: 0 0 .4rem; font-stretch: 68%; font-weight: 700; font-size: 1.9rem; letter-spacing: 0; }
 .mg .note { margin: 0 0 1.2rem; font-size: .85rem; color: var(--ink-soft); }
 .mg + .mg { margin-top: 2.8rem; }
 .mr { display: grid; grid-template-columns: 1fr auto; gap: .6rem 1.5rem; align-items: baseline; padding: .95rem 0; border-top: 1px solid var(--line); }
 .mr:last-child { border-bottom: 1px solid var(--line); }
 .mr .n { font-weight: 600; font-size: 1.02rem; letter-spacing: -0.005em; }
 .mr .d { grid-column: 1; font-size: .82rem; color: var(--ink-soft); margin-top: -.35rem; }
-.mr .p { font-stretch: 125%; font-weight: 800; font-size: 1.05rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.mr .p { font-stretch: 68%; font-weight: 700; font-size: 1.35rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .menu__foot { margin-top: clamp(2.5rem, 5vw, 4rem); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1.2rem 2rem; padding-top: 1.5rem; border-top: 1px solid var(--line); }
 .menu__foot p { margin: 0; font-size: .9rem; color: var(--ink-soft); max-width: 48ch; }
 
@@ -215,7 +258,7 @@ figcaption { margin-top: .8rem; display: flex; justify-content: space-between; g
 .marquee__track { display: flex; gap: 1rem; width: max-content; animation: mq 48s linear infinite; }
 .marquee:hover .marquee__track { animation-play-state: paused; }
 .marquee__track figure { width: clamp(14rem, 26vw, 24rem); flex: none; }
-.marquee__track img { aspect-ratio: 4 / 5; object-fit: cover; width: 100%; border-radius: 3px; }
+.marquee__track img { aspect-ratio: 4 / 5; object-fit: cover; width: 100%; border-radius: var(--r-img); }
 .marquee__track figure:nth-child(even) img { aspect-ratio: 3 / 2; }
 @keyframes mq { to { transform: translateX(-50%); } }
 
@@ -223,7 +266,7 @@ figcaption { margin-top: .8rem; display: flex; justify-content: space-between; g
 .quotes { display: grid; gap: clamp(2rem, 5vw, 3rem); grid-template-columns: 1fr; }
 @media (min-width: 860px) { .quotes { grid-template-columns: repeat(3, 1fr); } }
 .quotes blockquote { margin: 0; padding-top: 1.4rem; border-top: 1px solid var(--line); display: grid; gap: 1.2rem; align-content: start; }
-.quotes cite { font-style: normal; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; color: var(--ink-soft); }
+.quotes cite { font-style: normal; font-size: .85rem; color: var(--ink-soft); }
 
 /* venir + cta */
 .cta { display: grid; gap: clamp(2.5rem, 6vw, 5rem); }
@@ -233,7 +276,7 @@ figcaption { margin-top: .8rem; display: flex; justify-content: space-between; g
 @media (min-width: 720px) { .infos { grid-template-columns: repeat(4, 1fr); } }
 .infos > div { padding: 1.5rem 1.5rem 1.5rem 0; border-bottom: 1px solid var(--line); display: grid; gap: .6rem; align-content: start; }
 @media (min-width: 720px) { .infos > div { border-bottom: 0; border-right: 1px solid var(--line); } .infos > div:last-child { border-right: 0; } }
-.infos dt { margin: 0; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; color: var(--ink-soft); }
+.infos dt { margin: 0; font-size: .85rem; color: var(--ink-soft); }
 .infos dd { margin: 0; font-size: 1rem; line-height: 1.5; }
 .infos dd a { text-decoration: none; border-bottom: 1px solid var(--line-strong); }
 .infos dd a:hover { border-color: currentColor; }
@@ -242,7 +285,7 @@ figcaption { margin-top: .8rem; display: flex; justify-content: space-between; g
 
 /* footer */
 .foot { border-top: 1px solid var(--line); padding: 2rem 0 max(2rem, env(safe-area-inset-bottom)); }
-.foot__in { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem 2rem; font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; color: var(--ink-soft); }
+.foot__in { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem 2rem; font-size: .85rem; color: var(--ink-soft); }
 .foot__in a { text-decoration: none; }
 .foot__in a:hover { color: var(--creme); }
 .foot__links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
@@ -256,53 +299,59 @@ figcaption { margin-top: .8rem; display: flex; justify-content: space-between; g
 <header class="hdr" id="hdr">
   <div class="wrap hdr__in">
     <a class="brand" href="#top" aria-label="Sainte-Anne Barber, accueil">
-      <img src="assets/logo-m.png" id="brandLogo" width="800" height="565" alt="">
-      <span class="w">Sainte-Anne Barber</span>
+      <span class="brand__mark"><img src="assets/logo-black-m.png" id="brandLogo" width="800" height="565" alt=""></span>
     </a>
     <nav aria-label="Sections">
       <a href="#salon">Le salon</a>
       <a href="#equipe">L'équipe</a>
       <a href="#carte">La carte</a>
       <a href="#avis">Avis</a>
-      <a href="#venir">Venir</a>
+      <a href="#venir">Contact</a>
     </nav>
-    <a class="btn btn--solid" href="https://www.planity.com/sainte-anne-barber-34000-montpellier" rel="noopener">Réserver</a>
+    <div class="hdr__right">
+      <a class="ig" href="https://www.instagram.com/sainte_anne_barber/" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+      <a class="btn btn--solid" href="https://www.planity.com/sainte-anne-barber-34000-montpellier" rel="noopener">Réserver</a>
+    </div>
   </div>
 </header>
 
 <main id="top">
 
-  <!-- Le réel Instagram, en ouverture, sans un mot -->
-  <section class="reel dark" id="reel" aria-label="Le salon en vidéo">
-    <video class="reel__bg" id="reelBg" muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1"></video>
-    <video class="reel__video" id="reelVideo" muted loop playsinline autoplay preload="auto" aria-label="Vidéo du salon Sainte-Anne Barber">
-      <source src="assets/reel.mp4" type="video/mp4">
-    </video>
-    <button class="reel__tap" id="reelTap" type="button" aria-label="Lire la vidéo"><span></span></button>
-    <div class="reel__fade" aria-hidden="true"></div>
-  </section>
-
-  <!-- Hero : le lieu -->
-  <section class="hero dark" aria-label="Le salon">
-    <div class="hero__media" id="heroMedia">
-      <img src="assets/enseigne.webp" srcset="assets/enseigne-m.webp 800w, assets/enseigne.webp 1600w" sizes="100vw" width="1600" height="900" fetchpriority="high" alt="L'enseigne Sainte-Anne Barber rétroéclairée sur le mur noir du salon, entre la brique rouge et les lampes à filament.">
-    </div>
-    <div class="hero__scrim" aria-hidden="true"></div>
-    <div class="wrap hero__in">
-      <p class="kicker rv f" style="--d:200ms">Coiffeur &amp; barbier · Montpellier</p>
-      <h1 class="disp split" data-split style="--d:300ms"><span class="nb">Sainte-Anne</span> Barber</h1>
-      <div class="hero__sub">
-        <p class="lede rv f" style="--d:700ms">Coupe, barbe et soins du visage, rue Ranchin, à l'ombre du Carré Sainte-Anne.</p>
-        <div class="hero__cta rv f" style="--d:850ms">
-          <a class="btn btn--solid" href="https://www.planity.com/sainte-anne-barber-34000-montpellier" rel="noopener">Réserver un créneau</a>
-          <a class="btn btn--ghost" href="#carte">Voir la carte</a>
+  <!-- Ouverture : le réel au premier plan, le nom derrière, la carte à droite -->
+  <section class="stage" id="stage" aria-label="Sainte-Anne Barber">
+    <video class="stage__bg" id="stageBg" muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1"></video>
+    <img class="stage__bgimg" src="assets/enseigne-m.webp" width="800" height="450" alt="" aria-hidden="true">
+    <div class="stage__tint" aria-hidden="true"></div>
+    <div class="wrap stage__in">
+      <div class="stage__main">
+        <h1 class="stage__title disp rv f" style="--d:250ms"><span class="l1">Sainte-Anne</span><span class="l2">Barber</span></h1>
+        <div class="stage__card rv f" id="card" style="--d:450ms">
+          <img src="assets/barbier.webp" srcset="assets/barbier-m.webp 800w, assets/barbier.webp 1600w" sizes="(min-width: 900px) 22vw, 100vw" width="1600" height="900" alt="Un barbier concentré sur sa coupe, devant le mur de brique du salon." fetchpriority="high">
+          <video id="reelVideo" muted loop playsinline autoplay preload="auto" aria-label="Vidéo du salon Sainte-Anne Barber"><source src="assets/reel.mp4" type="video/mp4"></video>
+          <button class="stage__tap" id="reelTap" type="button" aria-label="Lire la vidéo"><span></span></button>
+        </div>
+        <div class="stage__foot rv f" style="--d:800ms">
+          <div class="glass">
+            <b>5,0 <span class="star" aria-hidden="true">★</span></b>
+            <p>Plus de 50 avis Google. Coiffeur et barbier rue Ranchin, dans l'Écusson, depuis 2025.</p>
+          </div>
+          <div class="badge" aria-hidden="true"><svg viewBox="0 0 100 100"><defs><path id="circ" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0"/></defs><text><textPath href="#circ">Montpellier · Écusson · Rue Ranchin · </textPath></text></svg></div>
         </div>
       </div>
-      <div class="hero__bar rv f" style="--d:1000ms">
-        <span><b>Lundi à samedi</b> · 9h à 19h</span>
-        <span><b>Avec ou sans</b> rendez-vous</span>
-        <span><b>10 rue Ranchin</b> · 34000 Montpellier</span>
-      </div>
+      <aside class="stage__side rv f" style="--d:650ms" aria-label="La carte, en bref">
+        <ul class="quick">
+          <li><span>Coupe</span><b>25 €</b></li>
+          <li><span>Barbe</span><b>15 €</b></li>
+          <li><span>Coupe et barbe</span><b>35 €</b></li>
+          <li><span>Coupe étudiant</span><b>20 €</b></li>
+          <li><span>Soin visage</span><b>dès 30 €</b></li>
+          <li><span>Réserver un créneau</span><a class="btn btn--amber" href="https://www.planity.com/sainte-anne-barber-34000-montpellier" rel="noopener">Réserver <span class="arr" aria-hidden="true">→</span></a></li>
+        </ul>
+        <div class="stage__ctas">
+          <a class="btn btn--solid" href="https://www.planity.com/sainte-anne-barber-34000-montpellier" rel="noopener">Réserver <span class="arr" aria-hidden="true">↗</span></a>
+          <a class="btn btn--ghost" href="#carte">La carte <span class="arr" aria-hidden="true">↘</span></a>
+        </div>
+      </aside>
     </div>
   </section>
 
@@ -312,7 +361,7 @@ figcaption { margin-top: .8rem; display: flex; justify-content: space-between; g
       <div class="grid-2 grid-2--wide">
         <div>
           <p class="kicker rv f">Le salon</p>
-          <h2 class="disp h-lg split" data-split style="margin-top:1.2rem">À l'ombre du <span class="it">Carré</span> Sainte-Anne.</h2>
+          <h2 class="disp h-lg split" data-split style="margin-top:1.2rem">À l'ombre du Carré Sainte-Anne.</h2>
           <p class="body rv f" style="margin-top:1.8rem;--d:120ms">Une rue étroite de l'Écusson, entre les ateliers et les galeries du quartier Sainte-Anne. De la brique, du cuir noir, des lampes à filament, et le temps de faire les choses proprement. Ouvert depuis novembre 2025.</p>
           <div class="stats rv f" style="--d:220ms">
             <div><b>2025</b><span>Ouverture</span></div>
@@ -338,7 +387,7 @@ figcaption { margin-top: .8rem; display: flex; justify-content: space-between; g
       <div class="head head--split">
         <div>
           <p class="kicker rv f">Qui vous coiffe</p>
-          <h2 class="disp h-lg split" data-split style="margin-top:1.2rem">Tony <span class="it">&amp;</span> Loïc.</h2>
+          <h2 class="disp h-lg split" data-split style="margin-top:1.2rem">Tony &amp; Loïc.</h2>
         </div>
         <p class="body rv f" style="max-width:38ch">Deux barbiers, une façon de travailler : on regarde d'abord, on écoute ensuite, et on ne lâche pas la finition. Dégradés, coupes aux ciseaux, tailles de barbe au rasoir, soins du visage.</p>
       </div>
@@ -360,7 +409,7 @@ figcaption { margin-top: .8rem; display: flex; justify-content: space-between; g
       <div class="head head--split">
         <div>
           <p class="kicker rv f">Nos services</p>
-          <h2 class="disp h-lg split" data-split style="margin-top:1.2rem">La carte, <span class="it">sans surprise.</span></h2>
+          <h2 class="disp h-lg split" data-split style="margin-top:1.2rem">La carte, sans surprise.</h2>
         </div>
         <p class="body rv f" style="max-width:36ch">Des prix affichés, identiques pour les deux barbiers. Le soin visage et la boisson s'ajoutent à n'importe quelle formule.</p>
       </div>
@@ -421,7 +470,7 @@ figcaption { margin-top: .8rem; display: flex; justify-content: space-between; g
     <div class="wrap">
       <div class="head">
         <p class="kicker rv f">Ils en parlent</p>
-        <h2 class="disp h-lg split" data-split>5,0 <span class="it">sur</span> Google.</h2>
+        <h2 class="disp h-lg split" data-split>5,0 sur Google.</h2>
       </div>
       <div class="quotes">
         <blockquote class="rv f"><p class="serif-q">« Il a su mettre une coupe là où je ne trouvais pas les mots. »</p><cite>Avis Google</cite></blockquote>
@@ -437,10 +486,10 @@ figcaption { margin-top: .8rem; display: flex; justify-content: space-between; g
       <div class="cta__head">
         <div>
           <p class="kicker rv f">Venir au salon</p>
-          <h2 class="disp h-xl split" data-split style="margin-top:1.2rem">Réservez <span class="it">votre</span> créneau.</h2>
+          <h2 class="disp h-xl split" data-split style="margin-top:1.2rem">Réservez votre créneau.</h2>
         </div>
         <div class="hero__cta rv f">
-          <a class="btn btn--solid" href="https://www.planity.com/sainte-anne-barber-34000-montpellier" rel="noopener">Réserver sur Planity</a>
+          <a class="btn btn--solid" href="https://www.planity.com/sainte-anne-barber-34000-montpellier" rel="noopener">Réserver sur Planity <span class="arr" aria-hidden="true">↗</span></a>
           <a class="btn btn--ghost" href="tel:+33768066436">07 68 06 64 36</a>
         </div>
       </div>
@@ -498,7 +547,7 @@ figcaption { margin-top: .8rem; display: flex; justify-content: space-between; g
     io = new IntersectionObserver(function (es) {
       es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } });
     }, { rootMargin: '0px 0px -10% 0px', threshold: 0.12 });
-    targets.forEach(function (t) { if (!t.closest('.hero')) io.observe(t); });
+    targets.forEach(function (t) { if (!t.closest('.stage')) io.observe(t); });
   } else { targets.forEach(function (t) { t.classList.add('on'); }); }
 
   /* header: solid after scroll, dark text over light sections */
@@ -511,23 +560,27 @@ figcaption { margin-top: .8rem; display: flex; justify-content: space-between; g
       var over = false;
       lights.forEach(function (s) { var r = s.getBoundingClientRect(); if (r.top <= 40 && r.bottom > 40) over = true; });
       hdr.classList.toggle('on-light', over);
-      logo.src = over ? 'assets/logo-black-m.png' : 'assets/logo-m.png';
+      logo.src = over ? 'assets/logo-m.png' : 'assets/logo-black-m.png';
     }, { rootMargin: '-72px 0px -100% 0px', threshold: [0, 1] });
     lights.forEach(function (s) { io2.observe(s); });
     window.addEventListener('scroll', function () {
       var over = false;
       lights.forEach(function (s) { var r = s.getBoundingClientRect(); if (r.top <= 40 && r.bottom > 40) over = true; });
-      if (hdr.classList.contains('on-light') !== over) { hdr.classList.toggle('on-light', over); logo.src = over ? 'assets/logo-black-m.png' : 'assets/logo-m.png'; }
+      if (hdr.classList.contains('on-light') !== over) { hdr.classList.toggle('on-light', over); logo.src = over ? 'assets/logo-m.png' : 'assets/logo-black-m.png'; }
     }, { passive: true });
   }
 
   /* hero parallax */
-  var media = document.getElementById('heroMedia');
-  if (!reduced) {
+  var card = document.getElementById('card'), ttl = document.querySelector('.stage__title');
+  if (!reduced && window.matchMedia('(min-width: 900px)').matches) {
     var last = -1;
     (function loop() {
       var y = window.scrollY;
-      if (y !== last && y < window.innerHeight * 1.2) { media.style.transform = 'translate3d(0,' + (y * 0.22).toFixed(1) + 'px,0)'; last = y; }
+      if (y !== last && y < window.innerHeight * 1.2) {
+        if (y === 0) { card.style.transform = ''; ttl.style.transform = ''; }
+        else { card.style.transform = 'translate3d(0,' + (y * -0.12).toFixed(1) + 'px,0)'; ttl.style.transform = 'translate3d(0,' + (y * 0.18).toFixed(1) + 'px,0)'; }
+        last = y;
+      }
       requestAnimationFrame(loop);
     })();
   }
@@ -537,24 +590,23 @@ figcaption { margin-top: .8rem; display: flex; justify-content: space-between; g
   track.innerHTML += track.innerHTML;
 
 
-  /* le réel : démarre à l'arrivée, se cache si la vidéo manque */
-  var reel = document.getElementById('reel'), rv = document.getElementById('reelVideo'), rbg = document.getElementById('reelBg'), tap = document.getElementById('reelTap');
-  function reelOff() { reel.classList.add('is-off'); }
-  rv.addEventListener('error', reelOff, true);
-  rv.querySelector('source').addEventListener('error', reelOff);
+  /* le réel : joue dans la carte dès l'arrivée ; sans fichier, la photo reste */
+  var stage = document.getElementById('stage'), rv = document.getElementById('reelVideo'), rbg = document.getElementById('stageBg'), tap = document.getElementById('reelTap');
+  var reelOk = false;
   rv.addEventListener('loadedmetadata', function () {
-    if (!rv.videoWidth) { reelOff(); return; }
-    if (window.matchMedia('(min-width: 760px) and (min-aspect-ratio: 1/1)').matches) { rbg.src = rv.currentSrc; rbg.play().catch(function () {}); }
+    if (!rv.videoWidth) return;
+    reelOk = true; stage.classList.add('has-video');
+    rbg.src = rv.currentSrc; rbg.play().catch(function () {});
   });
   function startReel() {
-    if (reel.classList.contains('is-off')) return;
+    if (!reelOk) { rv.addEventListener('loadedmetadata', startReel, { once: true }); return; }
     try { rv.currentTime = 0; } catch (e) {}
     var p = rv.play();
-    if (p && p.catch) p.catch(function () { reel.classList.add('needs-tap'); });
+    if (p && p.catch) p.catch(function () { stage.classList.add('needs-tap'); });
   }
-  tap.addEventListener('click', function () { reel.classList.remove('needs-tap'); rv.play(); rbg.play().catch(function () {}); });
-  document.addEventListener('touchstart', function once() { if (reel.classList.contains('needs-tap')) { reel.classList.remove('needs-tap'); rv.play(); } document.removeEventListener('touchstart', once); }, { passive: true });
-  document.addEventListener('visibilitychange', function () { if (!document.hidden && !reel.classList.contains('is-off')) rv.play().catch(function () {}); });
+  tap.addEventListener('click', function () { stage.classList.remove('needs-tap'); rv.play(); rbg.play().catch(function () {}); });
+  document.addEventListener('touchstart', function once() { if (stage.classList.contains('needs-tap')) { stage.classList.remove('needs-tap'); rv.play(); } document.removeEventListener('touchstart', once); }, { passive: true });
+  document.addEventListener('visibilitychange', function () { if (!document.hidden && reelOk) rv.play().catch(function () {}); });
 
   /* intro */
   var intro = document.getElementById('intro');
@@ -562,8 +614,7 @@ figcaption { margin-top: .8rem; display: flex; justify-content: space-between; g
   function reveal() {
     document.body.classList.remove('locked'); document.body.classList.add('ready');
     startReel();
-    /* the hero now sits under the reel: reveal it when it actually comes into view */
-    document.querySelectorAll('.hero .rv, .hero .split').forEach(function (t) { if (io) io.observe(t); else t.classList.add('on'); });
+    document.querySelectorAll('.stage .rv, .stage .split').forEach(function (t) { t.classList.add('on'); });
   }
   if (seen || reduced) { intro.classList.add('gone'); reveal(); }
   else {
