@@ -20,6 +20,12 @@
         ],
         "createdAt": "2026-09-11T18:24:25.340Z",
         "reason": "Claude: every .sec carries its inset through the inner .wrap (padding-inline var(--gutter)); the section itself is a full-bleed colour band"
+      },
+      {
+        "rule": "overused-font",
+        "value": "instrument serif",
+        "createdAt": "2026-09-11T18:24:57.208Z",
+        "reason": "brand/brand.md: Instrument Serif italique est l'accent validé par Robin (v0.3), un mot par titre et citations clients"
       }
     ]
   }
