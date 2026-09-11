@@ -1,0 +1,26 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "clipped-overflow-container",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-09-11T18:21:58.270Z",
+        "reason": "Claude: body overflow-x clip only guards horizontal scroll; the positioned children are fixed header, mobile bar and skip link, which the viewport clip never cuts"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-09-11T18:24:25.340Z",
+        "reason": "Claude: every .sec carries its inset through the inner .wrap (padding-inline var(--gutter)); the section itself is a full-bleed colour band"
+      }
+    ]
+  }
+}
